@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 40" width="160" height="40" role="img" aria-label="trell">
+    <rect x="4" y="4" width="32" height="32" rx="8" fill="#E63946"/>
+    <text x="20" y="20" fill="#ffffff"
+          font-family="'Poppins', 'Montserrat', 'Helvetica Neue', sans-serif" font-size="16" font-weight="800"
+          text-anchor="middle" dominant-baseline="central"
+          style="letter-spacing: -0.02em;">t</text>
+    <text x="46" y="27" fill="#E63946"
+          font-family="'Poppins', 'Montserrat', 'Helvetica Neue', sans-serif" font-size="20" font-weight="700"
+          letter-spacing="-0.02em"
+          style="text-transform: lowercase;">trell</text>
+</svg>

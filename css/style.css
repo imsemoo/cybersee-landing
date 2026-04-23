@@ -243,7 +243,7 @@ img { max-width: 100%; display: block; }
 
 .section-header {
     text-align: center;
-    max-width: 680px;
+    max-width: 720px;
     margin: 0 auto 64px;
 }
 
@@ -2145,6 +2145,7 @@ html[data-bs-theme="light"] .logo-img--light { display: block; }
    ===========================================================================*/
 
 .feature-card,
+.pricing-card,
 .testimonial-card,
 .pipeline__card,
 .problem__card,
@@ -2154,8 +2155,6 @@ html[data-bs-theme="light"] .logo-img--light { display: block; }
 .threats__dashboard,
 .threats__stat-card,
 .threats__risk-chart,
-.request-access__card,
-.platform__card,
 .cta__content,
 .navbar,
 .trusted {
@@ -2167,1197 +2166,605 @@ html[data-bs-theme="light"] .logo-img--light { display: block; }
 }
 
 
-/* ===========================================================================
-   FLOATING ANIMATIONS
-   ===========================================================================*/
+/* ============================================================
+   LANDING PAGE REDESIGN — Phase 1 additions (theme-aware)
+   Styles for new sections introduced per the feedback doc.
+   Uses design tokens so both light & dark themes render correctly.
+   ============================================================ */
 
-@keyframes floatSlow {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-12px); }
-}
-
-@keyframes floatMedium {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-8px) rotate(0.5deg); }
-}
-
-@keyframes floatFast {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-6px); }
-}
-
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-@keyframes glowPulse {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 0.8; }
-}
-
-.float-slow      { animation: floatSlow 6s ease-in-out infinite; }
-.float-medium     { animation: floatMedium 5s ease-in-out infinite; }
-.float-fast       { animation: floatFast 4s ease-in-out infinite; }
-.float-slow-alt   { animation: floatSlow 7s ease-in-out infinite 1s; }
-.float-medium-alt { animation: floatMedium 5.5s ease-in-out infinite 0.5s; }
-
-
-/* ===========================================================================
-   PLATFORM PREVIEW SECTION
-   ===========================================================================*/
-
-.platform {
-    padding: var(--section-pad) 0;
-    position: relative;
-    overflow: hidden;
-}
-
-.platform__showcase {
-    margin-top: 60px;
-    position: relative;
-}
-
-.platform__scene {
-    display: grid;
-    grid-template-columns: 1.4fr 0.8fr;
-    grid-template-rows: auto auto auto;
-    gap: 24px;
-    position: relative;
-    perspective: 1200px;
-}
-
-/* Card chrome (window header) */
-.platform__card {
-    background: var(--brand-elev);
-    border: 1px solid var(--brand-border);
-    border-radius: var(--ui-radius-lg);
-    overflow: hidden;
-    box-shadow: var(--brand-shadow);
-    will-change: transform;
-}
-
-.platform__card:hover {
-    box-shadow:
-        var(--brand-shadow),
-        0 0 40px color-mix(in srgb, var(--brand-primary) 12%, transparent);
-    transform: translateY(-4px) !important;
-}
-
-.platform__card-chrome {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 10px 14px;
-    background: var(--brand-elev-2);
-    border-bottom: 1px solid var(--brand-border);
-    font-size: 0.75rem;
-}
-
-.platform__card-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-}
-.platform__card-dot--red    { background: #EF4444; }
-.platform__card-dot--yellow { background: #F59E0B; }
-.platform__card-dot--green  { background: #22C55E; }
-
-.platform__card-title {
-    margin-left: 8px;
-    color: var(--brand-muted);
-    font-weight: 500;
-    font-size: 0.75rem;
-    letter-spacing: 0.02em;
-}
-
-.platform__card-badge {
-    margin-left: auto;
-    background: color-mix(in srgb, var(--brand-primary) 15%, transparent);
-    color: var(--brand-primary);
-    padding: 2px 8px;
-    border-radius: var(--ui-radius-pill);
-    font-size: 0.65rem;
-    font-weight: 600;
-}
-
-.platform__card-body {
-    padding: 16px;
-}
-
-.platform__card-body--centered {
+/* ── Hero: Live threat cards ── */
+.hero__threat-cards {
     display: flex;
     flex-direction: column;
+    gap: 12px;
+    max-width: 720px;
+    margin: 48px auto 0;
+    width: 100%;
+}
+
+.threat-card {
+    display: flex;
     align-items: center;
     gap: 16px;
+    padding: 16px 20px;
+    background: var(--brand-elev);
+    border: 1px solid var(--brand-border);
+    border-radius: 14px;
+    box-shadow: var(--brand-shadow);
+    font-size: 14.5px;
+    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
 }
 
-/* Layout positions */
-.platform__card--main {
-    grid-column: 1;
-    grid-row: 1 / 3;
+.threat-card:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--brand-primary) 30%, var(--brand-border));
+    box-shadow: 0 14px 34px color-mix(in srgb, var(--brand-primary) 14%, transparent);
 }
 
-.platform__card--chart {
-    grid-column: 2;
-    grid-row: 1;
-}
-
-.platform__card--timeline {
-    grid-column: 1;
-    grid-row: 3;
-}
-
-.platform__card--risk {
-    grid-column: 2;
-    grid-row: 2;
-}
-
-.platform__card--alerts {
-    grid-column: 2;
-    grid-row: 3;
-}
-
-/* ---- Credential Log Table ---- */
-.platform__log-table {
-    font-size: 0.78rem;
-}
-
-.platform__log-header {
-    display: grid;
-    grid-template-columns: 2fr 1fr 0.8fr 0.8fr;
-    gap: 8px;
-    padding: 8px 0;
-    border-bottom: 1px solid var(--brand-border);
-    color: var(--brand-muted);
-    font-weight: 600;
+.threat-card__severity {
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
     text-transform: uppercase;
-    font-size: 0.65rem;
-    letter-spacing: 0.06em;
 }
 
-.platform__log-row {
-    display: grid;
-    grid-template-columns: 2fr 1fr 0.8fr 0.8fr;
-    gap: 8px;
-    padding: 10px 0;
-    border-bottom: 1px solid color-mix(in srgb, var(--brand-border) 50%, transparent);
+.threat-card__severity--critical {
+    color: var(--brand-risk-critical);
+    background: color-mix(in srgb, var(--brand-risk-critical) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--brand-risk-critical) 35%, transparent);
+}
+
+.threat-card__severity--high {
+    color: var(--brand-risk-high);
+    background: color-mix(in srgb, var(--brand-risk-high) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--brand-risk-high) 35%, transparent);
+}
+
+.threat-card__severity--medium {
+    color: var(--brand-risk-medium);
+    background: color-mix(in srgb, var(--brand-risk-medium) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--brand-risk-medium) 35%, transparent);
+}
+
+.threat-card__msg {
+    flex: 1;
     color: var(--brand-fg);
-    align-items: center;
+    text-align: left;
+    line-height: 1.5;
 }
 
-.platform__log-row--faded {
-    opacity: 0.5;
-}
-
-.platform__log-masked {
-    font-family: 'Space Grotesk', monospace;
-    font-size: 0.76rem;
-    color: var(--brand-fg);
-    letter-spacing: 0.01em;
-}
-
-.platform__log-source {
+.threat-card__time {
     color: var(--brand-muted);
-    font-size: 0.72rem;
-}
-
-.platform__log-risk,
-.platform__log-status {
-    font-size: 0.68rem;
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: var(--ui-radius-pill);
-    text-align: center;
+    font-size: 12.5px;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
-.platform__log-risk--critical { background: color-mix(in srgb, var(--brand-risk-critical) 15%, transparent); color: var(--brand-risk-critical); }
-.platform__log-risk--high     { background: color-mix(in srgb, var(--brand-risk-high) 15%, transparent); color: var(--brand-risk-high); }
-.platform__log-risk--medium   { background: color-mix(in srgb, var(--brand-risk-medium) 15%, transparent); color: var(--brand-risk-medium); }
-.platform__log-risk--low      { background: color-mix(in srgb, var(--brand-risk-low) 15%, transparent); color: var(--brand-risk-low); }
-
-.platform__log-status--new      { background: color-mix(in srgb, var(--brand-danger) 12%, transparent); color: var(--brand-danger); }
-.platform__log-status--active   { background: color-mix(in srgb, var(--brand-warning) 12%, transparent); color: var(--brand-warning); }
-.platform__log-status--reviewed { background: color-mix(in srgb, var(--brand-info) 12%, transparent); color: var(--brand-info); }
-.platform__log-status--resolved { background: color-mix(in srgb, var(--brand-success) 12%, transparent); color: var(--brand-success); }
-
-/* ---- Bar Chart ---- */
-.platform__bar-chart {
+/* ── Problem section: 6-column grid (flex-based, centers orphans) ── */
+.problem__grid--6 {
     display: flex;
-    align-items: flex-end;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 22px;
+    margin-top: 48px;
+}
+
+.problem__grid--6 > .problem__card {
+    flex: 1 1 280px;
+    max-width: calc((100% - 44px) / 3);
+    min-width: 260px;
+    padding: 30px 26px;
+    background: var(--brand-elev);
+    border: 1px solid var(--brand-border);
+    border-radius: 16px;
+    box-shadow: var(--brand-shadow);
+    text-align: left;
+}
+
+.problem__grid--6 > .problem__card .problem__card-icon {
+    margin: 0 0 16px;
+}
+
+.problem__grid--6 > .problem__card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--brand-primary) 30%, var(--brand-border));
+    box-shadow: 0 16px 40px color-mix(in srgb, var(--brand-primary) 18%, transparent);
+}
+
+@media (max-width: 900px) {
+    .problem__grid--6 > .problem__card {
+        max-width: calc((100% - 22px) / 2);
+    }
+}
+
+@media (max-width: 560px) {
+    .problem__grid--6 > .problem__card {
+        max-width: 100%;
+    }
+}
+
+.problem__grid--6 .problem__card-title {
+    font-size: 19px;
+    font-weight: 700;
+    margin: 16px 0 10px;
+    color: var(--brand-fg);
+}
+
+.problem__grid--6 .problem__card-text {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--brand-muted);
+    margin: 0;
+}
+
+.problem__actions {
+    display: flex;
+    align-items: center;
     justify-content: center;
     gap: 16px;
-    height: 140px;
-    padding-top: 8px;
-}
-
-.platform__bar-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    flex: 1;
-}
-
-.platform__bar-container {
-    width: 100%;
-    height: 110px;
-    display: flex;
-    align-items: flex-end;
-}
-
-.platform__bar {
-    width: 100%;
-    height: 0%;
-    border-radius: var(--ui-radius-sm) var(--ui-radius-sm) 0 0;
-    transition: height 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.platform__bar--critical { background: var(--brand-risk-critical); }
-.platform__bar--high     { background: var(--brand-risk-high); }
-.platform__bar--medium   { background: var(--brand-risk-medium); }
-.platform__bar--low      { background: var(--brand-risk-low); }
-.platform__bar--info     { background: var(--brand-info); }
-
-.platform__bar-label {
-    font-size: 0.65rem;
-    color: var(--brand-muted);
-    font-weight: 500;
-}
-
-/* ---- Line Chart ---- */
-.platform__line-chart {
-    width: 100%;
-    height: 100px;
-    display: block;
-}
-
-.platform__chart-labels {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0 0;
-    font-size: 0.65rem;
-    color: var(--brand-muted);
-}
-
-/* ---- Radial Chart ---- */
-.platform__radial {
-    position: relative;
-    width: 120px;
-    height: 120px;
-}
-
-.platform__radial-svg {
-    width: 100%;
-    height: 100%;
-}
-
-.platform__radial-fill {
-    transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.platform__radial-value {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-
-.platform__radial-number {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--brand-fg);
-    line-height: 1;
-}
-
-.platform__radial-label {
-    font-size: 0.7rem;
-    color: var(--brand-muted);
-}
-
-.platform__risk-detail {
-    text-align: center;
-}
-
-.platform__risk-tag {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: var(--ui-radius-pill);
-    font-size: 0.7rem;
-    font-weight: 600;
-}
-
-.platform__risk-tag--high {
-    background: color-mix(in srgb, var(--brand-risk-high) 15%, transparent);
-    color: var(--brand-risk-high);
-}
-
-.platform__risk-note {
-    display: block;
-    margin-top: 6px;
-    font-size: 0.72rem;
-    color: var(--brand-muted);
-}
-
-/* ---- Alert Feed ---- */
-.platform__alert-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.platform__alert-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 10px;
-    border-radius: var(--ui-radius-md);
-    background: var(--brand-elev-2);
-    font-size: 0.76rem;
-}
-
-.platform__alert-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-}
-
-.platform__alert-dot--critical { background: var(--brand-risk-critical); box-shadow: 0 0 8px color-mix(in srgb, var(--brand-risk-critical) 50%, transparent); }
-.platform__alert-dot--high     { background: var(--brand-risk-high); box-shadow: 0 0 8px color-mix(in srgb, var(--brand-risk-high) 50%, transparent); }
-.platform__alert-dot--medium   { background: var(--brand-risk-medium); }
-.platform__alert-dot--low      { background: var(--brand-risk-low); }
-
-.platform__alert-text {
-    flex: 1;
-    color: var(--brand-fg);
-    line-height: 1.4;
-}
-
-.platform__alert-time {
-    color: var(--brand-muted);
-    font-size: 0.68rem;
-    flex-shrink: 0;
-}
-
-/* ---- Background glows ---- */
-.platform__glow {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(120px);
-    pointer-events: none;
-    z-index: -1;
-    animation: glowPulse 6s ease-in-out infinite;
-}
-
-.platform__glow--1 {
-    width: 400px;
-    height: 400px;
-    background: color-mix(in srgb, var(--brand-primary) 15%, transparent);
-    top: -100px;
-    left: -100px;
-}
-
-.platform__glow--2 {
-    width: 300px;
-    height: 300px;
-    background: color-mix(in srgb, var(--brand-warning) 10%, transparent);
-    bottom: -50px;
-    right: -50px;
-    animation-delay: 3s;
-}
-
-/* ---- Platform CTA ---- */
-.platform__cta {
-    text-align: center;
-    margin-top: 48px;
-}
-
-.platform__cta-text {
-    color: var(--brand-muted);
-    font-size: 1rem;
-    margin-bottom: 20px;
-}
-
-
-/* ===========================================================================
-   THREATS SECTION — SPARKLINE ADDITION
-   ===========================================================================*/
-
-.threats__mini-chart {
-    margin-top: 16px;
-    padding: 14px;
-    background: var(--brand-elev-2);
-    border-radius: var(--ui-radius-md);
-    border: 1px solid var(--brand-border);
-}
-
-.threats__sparkline {
-    width: 100%;
-    height: 50px;
-    display: block;
-    margin-top: 8px;
-}
-
-.threats__sparkline-stats {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 8px;
-    font-size: 0.72rem;
-}
-
-.threats__sparkline-stats span:first-child {
-    color: var(--brand-success);
-    font-weight: 600;
-}
-
-.threats__sparkline-stats span:last-child {
-    color: var(--brand-muted);
-}
-
-
-/* ===========================================================================
-   REQUEST ACCESS SECTION
-   ===========================================================================*/
-
-.request-access {
-    padding: var(--section-pad) 0;
-}
-
-.request-access__grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-    margin-top: 48px;
-}
-
-.request-access__card {
-    background: var(--brand-elev);
-    border: 1px solid var(--brand-border);
-    border-radius: var(--ui-radius-lg);
-    padding: 40px 32px;
-    position: relative;
-    overflow: hidden;
-}
-
-.request-access__card:hover {
-    transform: translateY(-4px);
-    box-shadow:
-        var(--brand-shadow),
-        0 0 40px color-mix(in srgb, var(--brand-primary) 10%, transparent);
-}
-
-.request-access__card--primary {
-    border-color: color-mix(in srgb, var(--brand-primary) 30%, transparent);
-    box-shadow:
-        var(--brand-shadow),
-        0 0 60px color-mix(in srgb, var(--brand-primary) 8%, transparent);
-}
-
-.request-access__card--primary::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--brand-primary), var(--brand-primary-300));
-}
-
-.request-access__card-icon {
-    width: 52px;
-    height: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--ui-radius-md);
-    background: color-mix(in srgb, var(--brand-primary) 10%, transparent);
-    color: var(--brand-primary);
-    font-size: 1.3rem;
-    margin-bottom: 20px;
-}
-
-.request-access__card-title {
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: var(--brand-fg);
-    margin-bottom: 12px;
-}
-
-.request-access__card-desc {
-    color: var(--brand-muted);
-    line-height: 1.7;
-    font-size: 0.95rem;
-    margin-bottom: 20px;
-}
-
-.request-access__card-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.request-access__card-list li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--brand-fg);
-    font-size: 0.9rem;
-}
-
-.request-access__card-list i {
-    color: var(--brand-success);
-    font-size: 0.75rem;
-    flex-shrink: 0;
-}
-
-.request-access__card-note {
-    display: block;
-    margin-top: 16px;
-    text-align: center;
-    font-size: 0.78rem;
-    color: var(--brand-muted);
-}
-
-.request-access__card-note i {
-    margin-right: 4px;
-    color: var(--brand-primary);
-}
-
-
-/* ===========================================================================
-   ENHANCED 3D / DEPTH EFFECTS
-   ===========================================================================*/
-
-/* Feature cards depth on hover */
-.feature-card:hover {
-    transform: translateY(-6px) rotateX(2deg);
-    box-shadow:
-        0 20px 40px rgba(0, 0, 0, 0.08),
-        0 0 40px var(--lp-glow);
-}
-
-/* Problem cards subtle 3D */
-.problem__card {
-    transform-style: preserve-3d;
-}
-
-.problem__card:hover {
-    transform: translateY(-6px) perspective(800px) rotateY(-1deg);
-}
-
-/* Pipeline step cards */
-.pipeline__card:hover {
-    transform: translateY(-4px);
-    box-shadow:
-        var(--brand-shadow),
-        0 0 30px var(--lp-glow);
-}
-
-/* Use case cards */
-.use-case-card:hover {
-    transform: translateY(-6px);
-    box-shadow:
-        0 16px 32px rgba(0, 0, 0, 0.06),
-        0 0 30px var(--lp-glow);
-}
-
-/* Testimonial cards */
-.testimonial-card:hover {
-    transform: translateY(-4px) rotateX(1deg);
-    box-shadow:
-        var(--brand-shadow),
-        0 0 30px var(--lp-glow);
-}
-
-
-/* ===========================================================================
-   RESPONSIVE — PLATFORM & REQUEST ACCESS
-   ===========================================================================*/
-
-@media (max-width: 1024px) {
-    .platform__scene {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto;
-    }
-
-    .platform__card--main {
-        grid-column: 1 / -1;
-        grid-row: auto;
-    }
-
-    .platform__card--timeline {
-        grid-column: 1 / -1;
-    }
-}
-
-@media (max-width: 768px) {
-    .platform__scene {
-        grid-template-columns: 1fr;
-    }
-
-    .platform__card--main,
-    .platform__card--chart,
-    .platform__card--timeline,
-    .platform__card--risk,
-    .platform__card--alerts {
-        grid-column: 1;
-        grid-row: auto;
-    }
-
-    .request-access__grid {
-        grid-template-columns: 1fr;
-    }
-
-    /* Disable floating on mobile for performance */
-    .float-slow,
-    .float-medium,
-    .float-fast,
-    .float-slow-alt,
-    .float-medium-alt {
-        animation: none;
-    }
-}
-
-@media (max-width: 480px) {
-    .platform__log-header,
-    .platform__log-row {
-        grid-template-columns: 1.5fr 0.8fr 0.7fr;
-    }
-
-    /* Hide status column on very small screens */
-    .platform__log-header span:last-child,
-    .platform__log-row span:last-child {
-        display: none;
-    }
-
-    .request-access__card {
-        padding: 28px 20px;
-    }
-}
-
-
-/* ===========================================================================
-   HERO — LIVE ACTIVITY TICKER
-   ===========================================================================*/
-
-.hero__ticker {
-    max-width: 640px;
-    margin: 0 auto 40px;
-    overflow: hidden;
-    border-radius: var(--ui-radius-md);
-    background: var(--brand-elev);
-    border: 1px solid var(--brand-border);
-    box-shadow: var(--brand-shadow);
-    position: relative;
-    height: 42px;
-}
-
-.hero__ticker-track {
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.hero__ticker-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 16px;
-    font-size: 0.78rem;
-    color: var(--brand-text-secondary);
-    white-space: nowrap;
-    min-height: 42px;
-    flex-shrink: 0;
-}
-
-.hero__ticker-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    flex-shrink: 0;
-}
-
-.hero__ticker-item--critical .hero__ticker-dot {
-    background: var(--brand-risk-critical);
-    box-shadow: 0 0 8px var(--brand-risk-critical);
-    animation: pulse 1.5s infinite;
-}
-
-.hero__ticker-item--high .hero__ticker-dot {
-    background: var(--brand-risk-high);
-    box-shadow: 0 0 6px var(--brand-risk-high);
-}
-
-.hero__ticker-item--medium .hero__ticker-dot {
-    background: var(--brand-risk-medium);
-}
-
-.hero__ticker-time {
-    margin-left: auto;
-    color: var(--brand-text-tertiary);
-    font-size: 0.7rem;
-    flex-shrink: 0;
-}
-
-/* Hero microcopy under CTAs */
-.hero__microcopy {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 24px;
     flex-wrap: wrap;
-    font-size: 0.78rem;
-    color: var(--brand-text-tertiary);
+    margin-top: 24px;
 }
 
-.hero__microcopy span {
+/* ── Solution section ── */
+.solution {
+    padding: 110px 0;
+    position: relative;
+    background: var(--brand-elev-2);
+    border-top: 1px solid var(--brand-border);
+    border-bottom: 1px solid var(--brand-border);
+}
+
+.solution__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-top: 56px;
+}
+
+@media (max-width: 900px) {
+    .solution__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 560px) {
+    .solution__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.solution__card {
+    position: relative;
+    padding: 34px 28px;
+    background: var(--brand-elev);
+    border: 1px solid var(--brand-border);
+    border-radius: 18px;
+    box-shadow: var(--brand-shadow);
+    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.solution__card:hover {
+    transform: translateY(-4px);
+    border-color: var(--brand-primary);
+    box-shadow: 0 20px 48px color-mix(in srgb, var(--brand-primary) 22%, transparent);
+}
+
+.solution__card-number {
+    position: absolute;
+    top: 22px;
+    right: 26px;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--brand-primary-500);
+    opacity: 0.5;
+    letter-spacing: 1.2px;
+}
+
+.solution__card-icon {
+    width: 56px;
+    height: 56px;
     display: flex;
     align-items: center;
-    gap: 6px;
+    justify-content: center;
+    background: color-mix(in srgb, var(--brand-primary) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--brand-primary) 30%, transparent);
+    border-radius: 14px;
+    margin-bottom: 22px;
+    color: var(--brand-primary-500);
+    font-size: 24px;
 }
 
-.hero__microcopy i {
-    color: var(--brand-success);
-    font-size: 0.7rem;
+.solution__card-title {
+    font-size: 21px;
+    font-weight: 700;
+    margin: 0 0 12px;
+    color: var(--brand-fg);
 }
 
-
-/* ===========================================================================
-   THREATS — SCAN LINE EFFECT
-   ===========================================================================*/
-
-.threats__panel {
-    position: relative;
-    overflow: hidden;
+.solution__card-text {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--brand-muted);
+    margin: 0;
 }
 
-@keyframes scanLine {
-    0% { top: -2px; opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { top: 100%; opacity: 0; }
+.solution__bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    text-align: center;
+    margin-top: 64px;
+    padding-top: 48px;
+    border-top: 1px solid var(--brand-border);
 }
 
-.threats__scan-line {
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg,
-        transparent,
-        color-mix(in srgb, var(--brand-primary) 50%, transparent) 20%,
-        var(--brand-primary) 50%,
-        color-mix(in srgb, var(--brand-primary) 50%, transparent) 80%,
-        transparent
-    );
-    box-shadow: 0 0 12px color-mix(in srgb, var(--brand-primary) 40%, transparent);
-    animation: scanLine 4s ease-in-out infinite;
-    pointer-events: none;
-    z-index: 2;
+.solution__closing {
+    max-width: 800px;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--brand-muted);
+    margin: 0;
 }
 
-/* New threat flash-in animation */
-@keyframes threatFlashIn {
-    0% {
-        opacity: 0;
-        transform: translateY(-100%);
-        background: color-mix(in srgb, var(--brand-primary) 12%, transparent);
-    }
-    30% {
-        opacity: 1;
-        transform: translateY(0);
-        background: color-mix(in srgb, var(--brand-primary) 12%, transparent);
-    }
-    100% {
-        background: transparent;
-    }
+.solution__actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.threat-item--flash-in {
-    animation: threatFlashIn 0.8s ease-out;
-}
-
-
-/* ===========================================================================
-   PLATFORM — ENHANCED DEPTH
-   ===========================================================================*/
-
-/* Stronger perspective and base glow on platform scene */
-.platform__scene {
-    transform-style: preserve-3d;
-}
-
-/* Glow underneath platform cards */
-.platform__card::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 10%;
-    right: 10%;
-    height: 20px;
-    background: color-mix(in srgb, var(--brand-primary) 8%, transparent);
-    filter: blur(16px);
-    border-radius: 50%;
-    opacity: 0;
-    transition: opacity var(--transition);
-    z-index: -1;
-    pointer-events: none;
-}
-
-.platform__card:hover::after {
-    opacity: 1;
-}
-
-/* Platform CTA microcopy */
-.platform__cta-micro {
-    margin-top: 12px;
-    font-size: 0.78rem;
-    color: var(--brand-text-tertiary);
-}
-
-.platform__cta-micro i {
-    color: var(--brand-success);
-    margin-right: 4px;
-}
-
-
-/* ===========================================================================
-   ENHANCED MICRO-INTERACTIONS
-   ===========================================================================*/
-
-/* All interactive cards: deeper glow on hover */
-.feature-card,
-.problem__card,
-.use-case-card,
-.testimonial-card,
-.integration-item,
-.trust__badge,
-.request-access__card {
+/* ── Dashboard preview section ── */
+.dashboard-preview {
+    padding: 100px 0;
     position: relative;
 }
 
-/* Smooth glow increase on all cards */
-.feature-card::before,
-.problem__card::before,
-.use-case-card::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: var(--ui-radius-lg);
-    background: linear-gradient(135deg,
-        color-mix(in srgb, var(--brand-primary) 12%, transparent),
-        transparent 50%,
-        color-mix(in srgb, var(--brand-warning) 8%, transparent)
-    );
-    opacity: 0;
-    transition: opacity var(--transition-slow);
-    z-index: -1;
-    pointer-events: none;
+.dashboard-preview__tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 48px 0 36px;
 }
 
-.feature-card:hover::before,
-.problem__card:hover::before,
-.use-case-card:hover::before {
-    opacity: 1;
+.dashboard-preview__tab {
+    appearance: none;
+    padding: 12px 26px;
+    font-size: 14.5px;
+    font-weight: 600;
+    background: var(--brand-elev);
+    border: 1px solid var(--brand-border);
+    border-radius: 999px;
+    color: var(--brand-muted);
+    cursor: pointer;
+    transition: all var(--transition);
+    box-shadow: var(--brand-shadow);
 }
 
-/* Button hover glow enhancement */
-.btn--primary:hover {
-    box-shadow:
-        0 4px 16px color-mix(in srgb, var(--brand-primary) 35%, transparent),
-        0 0 40px color-mix(in srgb, var(--brand-primary) 15%, transparent);
-}
-
-/* Threats dashboard enhanced depth */
-.threats__dashboard {
-    box-shadow:
-        var(--brand-shadow),
-        0 0 80px color-mix(in srgb, var(--brand-primary) 5%, transparent);
-}
-
-.threats__dashboard:hover {
-    box-shadow:
-        var(--brand-shadow),
-        0 0 80px color-mix(in srgb, var(--brand-primary) 10%, transparent);
-}
-
-/* CTA section enhanced glow */
-.cta__content {
-    box-shadow:
-        var(--brand-shadow),
-        0 0 60px color-mix(in srgb, var(--brand-primary) 6%, transparent);
-}
-
-.cta__content:hover {
-    box-shadow:
-        var(--brand-shadow),
-        0 0 80px color-mix(in srgb, var(--brand-primary) 12%, transparent);
+.dashboard-preview__tab:hover {
+    border-color: color-mix(in srgb, var(--brand-primary) 40%, var(--brand-border));
+    color: var(--brand-fg);
     transform: translateY(-2px);
 }
 
-/* Hero badge enhanced feel */
-.hero__badge {
+.dashboard-preview__tab.is-active {
+    background: var(--brand-primary);
+    border-color: var(--brand-primary);
+    color: #fff;
+    box-shadow: 0 8px 28px color-mix(in srgb, var(--brand-primary) 40%, transparent);
+}
+
+.dashboard-preview__visual {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+.dashboard-preview__frame {
+    background: var(--brand-elev);
+    border: 1px solid var(--brand-border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 40px 90px color-mix(in srgb, var(--brand-primary) 14%, transparent),
+                var(--brand-shadow);
+}
+
+.dashboard-preview__frame-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 18px;
+    background: var(--brand-elev-2);
+    border-bottom: 1px solid var(--brand-border);
+}
+
+.dashboard-preview__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dashboard-preview__dot--red    { background: #ff5f56; }
+.dashboard-preview__dot--yellow { background: #ffbd2e; }
+.dashboard-preview__dot--green  { background: #27c93f; }
+
+.dashboard-preview__url {
+    margin-left: 18px;
+    font-size: 12.5px;
+    color: var(--brand-muted);
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+.dashboard-preview__image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* ── Under The Hood section ── */
+.under-hood {
+    padding: 100px 0;
+    background: var(--brand-elev-2);
+    border-top: 1px solid var(--brand-border);
+    border-bottom: 1px solid var(--brand-border);
+}
+
+.under-hood__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-top: 56px;
+}
+
+@media (max-width: 900px) {
+    .under-hood__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 560px) {
+    .under-hood__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.under-hood__card {
+    padding: 30px 26px;
+    background: var(--brand-elev);
+    border: 1px solid var(--brand-border);
+    border-radius: 16px;
     box-shadow: var(--brand-shadow);
+    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
 }
 
-/* Integration items subtle lift */
-.integration-item:hover {
+.under-hood__card:hover {
     transform: translateY(-4px);
-    box-shadow:
-        0 8px 24px rgba(0, 0, 0, 0.06),
-        0 0 24px var(--lp-glow);
+    border-color: color-mix(in srgb, var(--brand-info) 40%, var(--brand-border));
+    box-shadow: 0 16px 40px color-mix(in srgb, var(--brand-info) 16%, transparent);
 }
 
-/* Trust badge enhanced glow */
-.trust__badge:hover {
-    box-shadow:
-        var(--brand-shadow),
-        0 0 30px color-mix(in srgb, var(--brand-success) 10%, transparent);
+.under-hood__card-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, var(--brand-info) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--brand-info) 30%, transparent);
+    border-radius: 13px;
+    margin-bottom: 18px;
+    color: var(--brand-info);
+    font-size: 21px;
 }
 
+.under-hood__card-title {
+    font-size: 17.5px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--brand-fg);
+}
 
-/* ===========================================================================
-   RESPONSIVE — HERO TICKER
-   ===========================================================================*/
+.under-hood__card-text {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--brand-muted);
+    margin: 0;
+}
 
-@media (max-width: 768px) {
-    .hero__ticker {
-        max-width: 100%;
-        margin: 0 auto 32px;
+/* ── Navbar dropdowns (mega menu) ── */
+.navbar__menu {
+    gap: 6px;
+}
+
+.navbar__item.has-dropdown {
+    position: relative;
+}
+
+.navbar__link--dropdown {
+    appearance: none;
+    background: none;
+    border: none;
+    padding: 8px 14px;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 8px;
+    transition: color var(--transition), background var(--transition);
+}
+
+.navbar__link--dropdown i {
+    font-size: 10px;
+    transition: transform var(--transition);
+}
+
+.navbar__link--dropdown:hover {
+    color: var(--brand-fg);
+    background: color-mix(in srgb, var(--brand-primary) 8%, transparent);
+}
+
+.navbar__item.is-open > .navbar__link--dropdown i {
+    transform: rotate(180deg);
+}
+
+.navbar__dropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    min-width: 260px;
+    background: var(--brand-elev);
+    border: 1px solid var(--brand-border);
+    border-radius: 14px;
+    padding: 10px;
+    box-shadow: 0 20px 60px color-mix(in srgb, var(--brand-fg) 20%, transparent),
+                var(--brand-shadow);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.2s, transform 0.2s, visibility 0s 0.22s;
+    z-index: 100;
+}
+
+.navbar__item:hover > .navbar__dropdown,
+.navbar__item.is-open > .navbar__dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.2s, transform 0.2s, visibility 0s;
+}
+
+.navbar__dropdown-item {
+    display: block;
+    padding: 11px 16px;
+    font-size: 14px;
+    color: var(--brand-muted);
+    text-decoration: none;
+    border-radius: 9px;
+    transition: background var(--transition), color var(--transition);
+}
+
+.navbar__dropdown-item:hover {
+    background: color-mix(in srgb, var(--brand-primary) 12%, transparent);
+    color: var(--brand-primary-500);
+}
+
+@media (max-width: 900px) {
+    .navbar__dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0 0 0 14px;
+        min-width: auto;
     }
 
-    .hero__ticker-item {
-        font-size: 0.72rem;
-        padding: 10px 12px;
-    }
-
-    .hero__ticker-item span:nth-child(2) {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .hero__microcopy {
-        gap: 16px;
-        font-size: 0.72rem;
-    }
-
-    .threats__scan-line {
+    .navbar__link--dropdown i {
         display: none;
     }
 }
 
-@media (max-width: 480px) {
-    .hero__microcopy {
-        flex-direction: column;
-        gap: 8px;
-    }
+/* ── Trusted logos — SVG wordmarks ── */
+.trusted__logo {
+    height: 32px;
+    width: auto;
+    max-width: 160px;
+    object-fit: contain;
+    opacity: 0.7;
+    filter: grayscale(15%);
+    transition: opacity var(--transition), filter var(--transition), transform var(--transition);
 }
 
-
-/* ===========================================================================
-   FINAL POLISH — Floating Threat Toast
-   ===========================================================================*/
-
-.threat-toast {
-    position: fixed;
-    bottom: 32px;
-    right: 32px;
-    z-index: 900;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: var(--brand-elev);
-    border: 1px solid color-mix(in srgb, var(--brand-risk-critical) 30%, var(--brand-border));
-    border-left: 3px solid var(--brand-risk-critical);
-    border-radius: var(--ui-radius-md);
-    padding: 14px 18px;
-    box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.2),
-        0 0 40px color-mix(in srgb, var(--brand-risk-critical) 8%, transparent);
-    max-width: 380px;
-    transform: translateX(calc(100% + 40px));
-    opacity: 0;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
-    pointer-events: none;
-}
-
-.threat-toast--visible {
-    transform: translateX(0);
+.trusted__logo:hover {
     opacity: 1;
-    pointer-events: auto;
+    filter: grayscale(0%);
+    transform: translateY(-2px);
 }
 
-.threat-toast__icon {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: color-mix(in srgb, var(--brand-risk-critical) 14%, transparent);
-    color: var(--brand-risk-critical);
-    font-size: 0.9rem;
-    flex-shrink: 0;
-    animation: pulse 2s infinite;
+/* In dark theme, invert dark-brand logos slightly so navy/dark marks stay visible.
+   This is a safe fallback — the SVGs use currentColor-friendly hex that works
+   acceptably on both backgrounds at 70% opacity. */
+html[data-bs-theme="dark"] .trusted__logo {
+    filter: grayscale(10%) brightness(1.1);
 }
 
-.threat-toast__body {
-    flex: 1;
-    min-width: 0;
+html[data-bs-theme="dark"] .trusted__logo:hover {
+    filter: grayscale(0%) brightness(1.2);
 }
 
-.threat-toast__title {
-    display: block;
-    font-size: 0.78rem;
+/* Legacy text-based logo fallback (kept in case some pages still use it) */
+.trusted__logo-item {
     font-weight: 700;
-    color: var(--brand-fg);
-    margin-bottom: 2px;
-}
-
-.threat-toast__text {
-    display: block;
-    font-size: 0.72rem;
+    font-size: 17px;
+    letter-spacing: 0.3px;
     color: var(--brand-muted);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    opacity: 0.75;
+    transition: opacity var(--transition), color var(--transition), transform var(--transition);
+    padding: 10px 16px;
+    border-radius: 10px;
+    background: var(--brand-elev);
+    border: 1px solid var(--brand-border);
 }
 
-.threat-toast__time {
-    font-size: 0.65rem;
-    color: var(--brand-text-tertiary);
-    flex-shrink: 0;
-}
-
-@media (max-width: 768px) {
-    .threat-toast {
-        bottom: 16px;
-        right: 16px;
-        left: 16px;
-        max-width: none;
-    }
-}
-
-
-/* ===========================================================================
-   FINAL POLISH — Hero Counter Flash
-   ===========================================================================*/
-
-@keyframes counterFlash {
-    0% { color: var(--brand-fg); }
-    30% { color: var(--brand-primary-500); }
-    100% { color: var(--brand-fg); }
-}
-
-.hero-counter--flash {
-    animation: counterFlash 0.6s ease-out;
-}
-
-
-/* ===========================================================================
-   FINAL POLISH — CTA Button Shimmer
-   ===========================================================================*/
-
-@keyframes btnShimmer {
-    0% { left: -100%; }
-    100% { left: 200%; }
-}
-
-.btn--primary {
-    position: relative;
-    overflow: hidden;
-}
-
-.btn--primary::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.12),
-        transparent
-    );
-    animation: btnShimmer 4s ease-in-out infinite;
-    pointer-events: none;
-}
-
-
-/* ===========================================================================
-   FINAL POLISH — Critical Threat Pulse
-   ===========================================================================*/
-
-.threat-item--critical {
-    border-left: 3px solid transparent;
-    position: relative;
-}
-
-.threat-item--critical::before {
-    content: '';
-    position: absolute;
-    left: -3px;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background: var(--brand-risk-critical);
-    border-radius: 2px 0 0 2px;
-    animation: criticalPulse 2.5s ease-in-out infinite;
-}
-
-@keyframes criticalPulse {
-    0%, 100% {
-        box-shadow: 0 0 4px var(--brand-risk-critical);
-        opacity: 0.6;
-    }
-    50% {
-        box-shadow: 0 0 12px var(--brand-risk-critical);
-        opacity: 1;
-    }
-}
-
-
-/* ===========================================================================
-   FINAL POLISH — Threats Dashboard Perspective
-   ===========================================================================*/
-
-.threats__dashboard--perspective {
-    transform: perspective(1200px) rotateX(1.5deg) rotateY(-0.5deg);
-    transition:
-        transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-        box-shadow 0.6s ease,
-        background-color var(--transition),
-        border-color var(--transition);
-}
-
-.threats__dashboard--perspective:hover {
-    transform: perspective(1200px) rotateX(0deg) rotateY(0deg);
-    box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.15),
-        0 0 80px color-mix(in srgb, var(--brand-primary) 8%, transparent);
-}
-
-
-/* ===========================================================================
-   FINAL POLISH — Problem Stat Countup (initial state)
-   ===========================================================================*/
-
-.problem__card-stat[data-stat] {
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.problem__card-stat[data-stat].counted {
+.trusted__logo-item:hover {
     opacity: 1;
-    transform: translateY(0);
+    color: var(--brand-primary-500);
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--brand-primary) 35%, var(--brand-border));
+}
+
+/* ── Problem section container background differentiation ── */
+.problem {
+    padding: 100px 0;
+}
+
+.problem__question {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--brand-muted);
+    margin: 0;
+}
+
+.problem__bottom {
+    margin-top: 64px;
+    padding-top: 48px;
+    border-top: 1px solid var(--brand-border);
+    text-align: center;
+}
+
+/* ── Trust bar spacing ── */
+.trusted {
+    padding: 60px 0;
+    background: var(--brand-elev-2);
+    border-top: 1px solid var(--brand-border);
+    border-bottom: 1px solid var(--brand-border);
+}
+
+.trusted__label {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--brand-muted);
+    margin: 0 0 32px;
+}
+
+.trusted__logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
 }

@@ -314,288 +314,93 @@ document.addEventListener('DOMContentLoaded', () => {
         statObserver.observe(threatStatValue);
     }
 
-    // ===== HERO LIVE COUNTER (incrementing threat count) =====
-    const heroCounter = document.getElementById('heroLiveCounter');
-    if (heroCounter) {
-        const baseVal = parseInt(heroCounter.dataset.base) || 14847;
-        let currentVal = baseVal;
-
-        function updateHeroCounter() {
-            // Random increment 1-4 every 3-8 seconds
-            const increment = Math.floor(Math.random() * 4) + 1;
-            currentVal += increment;
-            heroCounter.textContent = currentVal.toLocaleString();
-            // Flash effect on update
-            heroCounter.classList.remove('hero-counter--flash');
-            void heroCounter.offsetWidth; // force reflow
-            heroCounter.classList.add('hero-counter--flash');
-        }
-
-        function scheduleNextUpdate() {
-            const delay = 3000 + Math.random() * 5000; // 3-8s
-            setTimeout(() => {
-                updateHeroCounter();
-                scheduleNextUpdate();
-            }, delay);
-        }
-
-        scheduleNextUpdate();
-    }
-
-    // ===== HERO TICKER — Auto-cycling live activity feed =====
-    const heroTicker = document.getElementById('heroTicker');
-    if (heroTicker) {
-        const tickerItems = heroTicker.querySelectorAll('.hero__ticker-item');
-        let tickerIndex = 0;
-        const itemHeight = 42; // matches CSS min-height
-
-        setInterval(() => {
-            tickerIndex = (tickerIndex + 1) % tickerItems.length;
-            heroTicker.style.transform = `translateY(-${tickerIndex * itemHeight}px)`;
-        }, 3500);
-    }
-
-    // ===== LIVE THREAT FEED — Auto-cycling new threats =====
-    const liveFeed = document.getElementById('liveThreatFeed');
-    if (liveFeed) {
-        const incomingThreats = [
-            { severity: 'critical', category: 'Data Breach', text: 'Database dump containing 18K customer records posted on dark web marketplace', time: 'just now' },
-            { severity: 'high', category: 'Credential Leak', text: 'C-suite executive credentials found in stealer log collection — ***@company.com', time: 'just now' },
-            { severity: 'critical', category: 'Ransomware', text: 'New ransomware variant targeting your industry detected — IOCs match your infrastructure', time: 'just now' },
-            { severity: 'high', category: 'Phishing', text: 'Cloned login page detected on newly registered domain — SSL active', time: 'just now' },
-            { severity: 'medium', category: 'Recon', text: 'Threat actor advertising access to your network segment on underground forum', time: 'just now' },
-            { severity: 'critical', category: 'Exposure', text: 'Internal Jenkins server credentials found in public GitHub repository', time: 'just now' },
-        ];
-
-        let threatCycleIndex = 0;
-        let feedActive = false;
-
-        const feedCycleObserver = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                feedActive = entry.isIntersecting;
+    // ===== NAVBAR DROPDOWNS (click behavior for mobile/touch) =====
+    const dropdownToggles = document.querySelectorAll('.navbar__link--dropdown');
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            const parent = toggle.closest('.navbar__item');
+            const wasOpen = parent.classList.contains('is-open');
+            // Close all other dropdowns first
+            document.querySelectorAll('.navbar__item.is-open').forEach(item => {
+                if (item !== parent) item.classList.remove('is-open');
             });
-        }, { threshold: 0.2 });
-
-        feedCycleObserver.observe(liveFeed);
-
-        setInterval(() => {
-            if (!feedActive) return;
-
-            const threat = incomingThreats[threatCycleIndex % incomingThreats.length];
-            threatCycleIndex++;
-
-            const newItem = document.createElement('div');
-            newItem.className = `threat-item threat-item--${threat.severity} threat-item--flash-in`;
-            newItem.innerHTML = `
-                <span class="threat-item__severity">${threat.severity.toUpperCase()}</span>
-                <span class="threat-item__category">${threat.category}</span>
-                <span class="threat-item__text">${threat.text}</span>
-                <span class="threat-item__time">${threat.time}</span>
-            `;
-
-            // Remove last item, insert new at top
-            const items = liveFeed.querySelectorAll('.threat-item');
-            if (items.length >= 6) {
-                items[items.length - 1].remove();
-            }
-            liveFeed.insertBefore(newItem, liveFeed.firstChild);
-
-            // Remove flash class after animation
-            setTimeout(() => {
-                newItem.classList.remove('threat-item--flash-in');
-            }, 800);
-        }, 6000);
-    }
-
-    // ===== PLATFORM BAR CHART ANIMATION =====
-    const platformBars = document.querySelectorAll('.platform__bar');
-    if (platformBars.length) {
-        const barObserver = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const bars = entry.target.querySelectorAll('.platform__bar');
-                    bars.forEach((bar, i) => {
-                        setTimeout(() => {
-                            bar.style.height = bar.style.getPropertyValue('--bar-height');
-                        }, i * 150);
-                    });
-                    barObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.3 });
-
-        const barChart = document.getElementById('platformBarChart');
-        if (barChart) barObserver.observe(barChart);
-    }
-
-    // ===== PLATFORM CARD TILT (subtle 3D on mouse move) =====
-    const platformCards = document.querySelectorAll('.platform__card');
-    if (platformCards.length && window.innerWidth > 768) {
-        platformCards.forEach(card => {
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = ((y - centerY) / centerY) * -3;
-                const rotateY = ((x - centerX) / centerX) * 3;
-
-                card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
-            });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = '';
-            });
+            parent.classList.toggle('is-open', !wasOpen);
+            toggle.setAttribute('aria-expanded', String(!wasOpen));
         });
-    }
+    });
 
-    // ===== PLATFORM ALERT STAGGER =====
-    const alertList = document.querySelector('.platform__alert-list');
-    if (alertList) {
-        const alertItems = alertList.querySelectorAll('.platform__alert-item');
-        const alertObserver = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    alertItems.forEach((item, i) => {
-                        item.style.opacity = '0';
-                        item.style.transform = 'translateX(-16px)';
-                        setTimeout(() => {
-                            item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-                            item.style.opacity = '1';
-                            item.style.transform = 'translateX(0)';
-                        }, i * 120);
-                    });
-                    alertObserver.unobserve(entry.target);
-                }
+    // Close dropdowns on outside click
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.navbar__item.has-dropdown')) {
+            document.querySelectorAll('.navbar__item.is-open').forEach(item => {
+                item.classList.remove('is-open');
+                const btn = item.querySelector('.navbar__link--dropdown');
+                if (btn) btn.setAttribute('aria-expanded', 'false');
             });
-        }, { threshold: 0.3 });
-
-        alertObserver.observe(alertList);
-    }
-
-    // ===== PLATFORM LOG ROW STAGGER =====
-    const logTable = document.querySelector('.platform__log-table');
-    if (logTable) {
-        const logRows = logTable.querySelectorAll('.platform__log-row');
-        const logObserver = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    logRows.forEach((row, i) => {
-                        row.style.opacity = '0';
-                        row.style.transform = 'translateY(8px)';
-                        setTimeout(() => {
-                            row.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-                            row.style.opacity = '1';
-                            row.style.transform = 'translateY(0)';
-                        }, i * 100);
-                    });
-                    logObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.2 });
-
-        logObserver.observe(logTable);
-    }
-
-    // ===== FLOATING THREAT TOAST =====
-    const toast = document.getElementById('threatToast');
-    const toastText = document.getElementById('threatToastText');
-    if (toast && toastText) {
-        const toastMessages = [
-            'Critical credential exposure — executive accounts compromised',
-            'Ransomware group claiming new victim in your sector',
-            'Phishing campaign targeting your domain detected',
-            'Employee credentials found in dark web marketplace',
-            'Sensitive documents listed for sale on underground forum',
-            'New lookalike domain registered — matches your brand',
-            'Stealer log collection contains your corporate emails',
-            'Threat actor discussing your infrastructure on private channel',
-        ];
-
-        let toastIndex = 0;
-        let toastTimeout;
-
-        function showToast() {
-            toastText.textContent = toastMessages[toastIndex % toastMessages.length];
-            toastIndex++;
-            toast.classList.add('threat-toast--visible');
-
-            // Auto-hide after 5 seconds
-            clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => {
-                toast.classList.remove('threat-toast--visible');
-            }, 5000);
         }
+    });
 
-        // First toast after 12 seconds, then every 25-40 seconds
-        setTimeout(() => {
-            showToast();
-            setInterval(() => {
-                showToast();
-            }, 25000 + Math.random() * 15000);
-        }, 12000);
-    }
-
-    // ===== PROBLEM STAT COUNTUP =====
-    const problemStats = document.querySelectorAll('.problem__card-stat[data-stat]');
-    if (problemStats.length) {
-        const statCountObserver = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const el = entry.target;
-                    const target = parseFloat(el.dataset.stat);
-                    const prefix = el.dataset.prefix || '';
-                    const suffix = el.dataset.suffix || '';
-                    const isFloat = target % 1 !== 0;
-                    const duration = 1800;
-                    const start = performance.now();
-
-                    el.classList.add('counted');
-
-                    function update(now) {
-                        const progress = Math.min((now - start) / duration, 1);
-                        const eased = 1 - Math.pow(1 - progress, 3);
-                        const current = eased * target;
-
-                        el.textContent = prefix + (isFloat ? current.toFixed(2) : Math.floor(current)) + suffix;
-
-                        if (progress < 1) {
-                            requestAnimationFrame(update);
-                        } else {
-                            el.textContent = prefix + (isFloat ? target.toFixed(2) : target) + suffix;
-                        }
-                    }
-                    requestAnimationFrame(update);
-                    statCountObserver.unobserve(el);
-                }
+    // Close dropdowns on Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.navbar__item.is-open').forEach(item => {
+                item.classList.remove('is-open');
+                const btn = item.querySelector('.navbar__link--dropdown');
+                if (btn) btn.setAttribute('aria-expanded', 'false');
             });
-        }, { threshold: 0.5 });
+        }
+    });
 
-        problemStats.forEach(el => statCountObserver.observe(el));
-    }
+    // ===== DASHBOARD PREVIEW TABS =====
+    const dashboardTabs  = document.querySelectorAll('.dashboard-preview__tab');
+    const dashboardImage = document.getElementById('dashboard-preview-image');
+    const dashboardUrl   = document.getElementById('dashboard-preview-url');
 
-    // ===== THREAT FEED LIVE TIME TICKER =====
-    // Update all visible threat times every 60 seconds
-    setInterval(() => {
-        const timeEls = document.querySelectorAll('.threat-item__time');
-        timeEls.forEach(el => {
-            const text = el.textContent.trim();
-            if (text === 'just now') {
-                el.textContent = '1m ago';
-            } else {
-                const match = text.match(/^(\d+)(m|h) ago$/);
-                if (match) {
-                    let val = parseInt(match[1]);
-                    const unit = match[2];
-                    if (unit === 'm') {
-                        val += 1;
-                        el.textContent = val >= 60 ? '1h ago' : val + 'm ago';
-                    }
-                    // hours stay stable — don't over-increment
-                }
-            }
+    const tabContent = {
+        'brand-protection': {
+            src:  'assets/dashboard-preview/brand-protection.png',
+            alt:  'Cybersee Brand Protection dashboard — phishing monitoring',
+            url:  'platform.cybersee.io/dashboard/phishing',
+        },
+        'attack-surface': {
+            src:  'assets/dashboard-preview/attack-surface.png',
+            alt:  'Cybersee Attack Surface Detection dashboard',
+            url:  'platform.cybersee.io/dashboard/domain_scan',
+        },
+        'dark-web': {
+            src:  'assets/dashboard-preview/dark-web.png',
+            alt:  'Cybersee Dark Web Intelligence dashboard — credential leaks',
+            url:  'platform.cybersee.io/dashboard/data_leak',
+        },
+    };
+
+    dashboardTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            dashboardTabs.forEach(t => {
+                t.classList.remove('is-active');
+                t.setAttribute('aria-selected', 'false');
+            });
+            tab.classList.add('is-active');
+            tab.setAttribute('aria-selected', 'true');
+
+            const content = tabContent[tab.dataset.tab];
+            if (!content || !dashboardImage) return;
+
+            // Subtle fade transition on image swap
+            dashboardImage.style.opacity = '0';
+            setTimeout(() => {
+                dashboardImage.src = content.src;
+                dashboardImage.alt = content.alt;
+                if (dashboardUrl) dashboardUrl.textContent = content.url;
+                dashboardImage.style.opacity = '1';
+            }, 160);
         });
-    }, 60000);
+    });
+
+    // Ensure smooth fade is always available on the image
+    if (dashboardImage) {
+        dashboardImage.style.transition = 'opacity 0.2s ease';
+    }
 
 });

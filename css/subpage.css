@@ -1,0 +1,627 @@
+/* ============================================================
+   Cybersee Subpages — Shared styles (theme-aware)
+   Uses design tokens from style.css so both light & dark themes
+   render with proper contrast, backgrounds, and borders.
+   ============================================================ */
+
+/* ── Subpage hero (shorter than homepage hero) ── */
+.subpage-hero {
+    position: relative;
+    padding: 150px 0 90px;
+    background:
+        radial-gradient(ellipse at top left, var(--lp-glow), transparent 55%),
+        linear-gradient(180deg, var(--brand-elev-2) 0%, transparent 100%);
+    border-bottom: 1px solid var(--brand-border);
+}
+
+.breadcrumbs {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--brand-muted);
+    margin-bottom: 28px;
+    padding: 6px 14px;
+    background: var(--brand-elev);
+    border: 1px solid var(--brand-border);
+    border-radius: 999px;
+}
+
+.breadcrumbs a {
+    color: var(--brand-muted);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.breadcrumbs a:hover {
+    color: var(--brand-primary-600);
+}
+
+.breadcrumbs i {
+    font-size: 9px;
+    opacity: 0.5;
+}
+
+.breadcrumbs .current {
+    color: var(--brand-fg);
+    font-weight: 600;
+}
+
+.subpage-hero__title {
+    font-size: clamp(2rem, 4.5vw, 3.25rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin: 0 0 24px;
+    letter-spacing: -0.02em;
+    color: var(--brand-fg);
+    max-width: 980px;
+}
+
+.subpage-hero__subtitle {
+    max-width: 780px;
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--brand-muted);
+    margin: 0 0 40px;
+}
+
+.subpage-hero__cta {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+/* ── Generic subpage section ── */
+.subpage-section {
+    padding: 100px 0;
+    position: relative;
+}
+
+.subpage-section + .subpage-section {
+    border-top: 1px solid var(--brand-border);
+}
+
+.subpage-section--alt {
+    background: var(--brand-elev-2);
+}
+
+/* Headline spacing inside subpage sections */
+.subpage-section .section-header {
+    text-align: center;
+    max-width: 820px;
+    margin: 0 auto 56px;
+}
+
+/* ── Workflow Pipeline (horizontal stepper with arrows) ── */
+.workflow-pipeline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px;
+    align-items: stretch;
+    margin-top: 40px;
+}
+
+@media (min-width: 1100px) {
+    .workflow-pipeline {
+        /* desktop: show arrows properly */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+    }
+    .workflow-pipeline .workflow-step {
+        flex: 1 1 140px;
+        max-width: 180px;
+    }
+}
+
+.workflow-step {
+    padding: 24px 18px;
+    text-align: center;
+    background: var(--brand-elev);
+    border: 1px solid var(--brand-border);
+    border-radius: 16px;
+    box-shadow: var(--brand-shadow);
+    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.workflow-step:hover {
+    transform: translateY(-4px);
+    border-color: var(--brand-primary);
+    box-shadow: 0 14px 40px color-mix(in srgb, var(--brand-primary) 20%, transparent);
+}
+
+.workflow-step__icon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    background: color-mix(in srgb, var(--brand-primary) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--brand-primary) 30%, transparent);
+    border-radius: 14px;
+    color: var(--brand-primary-500);
+    font-size: 20px;
+}
+
+.workflow-step h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--brand-fg);
+}
+
+.workflow-step p {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--brand-muted);
+    margin: 0;
+}
+
+.workflow-arrow {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: color-mix(in srgb, var(--brand-primary) 55%, transparent);
+    font-size: 14px;
+    align-self: center;
+}
+
+@media (min-width: 1100px) {
+    .workflow-arrow {
+        display: flex;
+    }
+}
+
+/* ── Modules grid (2-col for Platform Overview) ── */
+.modules-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+}
+
+@media (max-width: 820px) {
+    .modules-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.module-card {
+    padding: 36px 32px;
+    background: var(--brand-elev);
+    border: 1px solid var(--brand-border);
+    border-radius: 18px;
+    box-shadow: var(--brand-shadow);
+    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.module-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--brand-primary);
+    box-shadow: 0 20px 50px color-mix(in srgb, var(--brand-primary) 22%, transparent);
+}
+
+.module-card__icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, var(--brand-primary) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--brand-primary) 30%, transparent);
+    border-radius: 16px;
+    color: var(--brand-primary-500);
+    font-size: 26px;
+    margin-bottom: 22px;
+}
+
+.module-card h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 14px;
+    color: var(--brand-fg);
+}
+
+.module-card > p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--brand-muted);
+    margin: 0 0 20px;
+}
+
+.module-card__threats {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+    border-top: 1px dashed var(--brand-border);
+    padding-top: 16px;
+}
+
+.module-card__threats li {
+    position: relative;
+    padding-left: 22px;
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--brand-fg);
+    opacity: 0.85;
+}
+
+.module-card__threats li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--brand-primary-500);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-primary) 18%, transparent);
+}
+
+.module-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--brand-primary-500);
+    text-decoration: none;
+    transition: gap var(--transition), color var(--transition);
+}
+
+.module-card__link:hover {
+    gap: 12px;
+    color: var(--brand-primary-700);
+}
+
+/* ── Screenshots grid (3-col, uses auto-fit for flexibility) ── */
+.screenshots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 56px;
+    justify-content: center;
+}
+
+.screenshot-card {
+    background: var(--brand-elev);
+    border: 1px solid var(--brand-border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--brand-shadow);
+    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.screenshot-card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--brand-primary) 40%, var(--brand-border));
+    box-shadow: 0 18px 42px color-mix(in srgb, var(--brand-primary) 18%, transparent);
+}
+
+.screenshot-card__visual {
+    aspect-ratio: 16 / 10;
+    background: var(--brand-elev-2);
+    border-bottom: 1px solid var(--brand-border);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.screenshot-card__visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.screenshot-card__visual--placeholder {
+    background:
+        linear-gradient(135deg,
+            color-mix(in srgb, var(--brand-primary) 14%, transparent),
+            color-mix(in srgb, var(--brand-primary) 3%, transparent));
+    color: color-mix(in srgb, var(--brand-primary) 60%, transparent);
+    font-size: 64px;
+}
+
+.screenshot-card h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 20px 20px 8px;
+    color: var(--brand-fg);
+}
+
+.screenshot-card p {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--brand-muted);
+    margin: 0 20px 20px;
+}
+
+/* ── Regional banner (Saudi/GCC) ── */
+.regional-banner {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    padding: 36px 40px;
+    background:
+        linear-gradient(135deg,
+            color-mix(in srgb, var(--brand-success) 10%, var(--brand-elev)),
+            color-mix(in srgb, var(--brand-primary) 10%, var(--brand-elev)));
+    border: 1px solid color-mix(in srgb, var(--brand-primary) 25%, var(--brand-border));
+    border-radius: 20px;
+    max-width: 980px;
+    margin: 0 auto;
+    box-shadow: var(--brand-shadow);
+}
+
+.regional-banner__icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, var(--brand-success) 20%, transparent);
+    border: 1px solid color-mix(in srgb, var(--brand-success) 40%, transparent);
+    border-radius: 16px;
+    color: var(--brand-success);
+    font-size: 26px;
+    flex-shrink: 0;
+}
+
+.regional-banner h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--brand-fg);
+}
+
+.regional-banner p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--brand-muted);
+    margin: 0;
+}
+
+@media (max-width: 640px) {
+    .regional-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 24px;
+    }
+}
+
+/* ── Generic cards grid — Flex-based with centered orphans ──
+   This is the key fix for 5-card, 7-card layouts that would
+   otherwise leave orphan cards awkwardly on the last row. */
+.gen-grid-3 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 22px;
+    margin-top: 56px;
+}
+
+.gen-grid-3 > .gen-card {
+    flex: 1 1 280px;
+    max-width: calc((100% - 44px) / 3);
+    min-width: 260px;
+}
+
+@media (max-width: 900px) {
+    .gen-grid-3 > .gen-card {
+        max-width: calc((100% - 22px) / 2);
+    }
+}
+
+@media (max-width: 560px) {
+    .gen-grid-3 > .gen-card {
+        max-width: 100%;
+    }
+}
+
+.gen-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+    margin-top: 56px;
+}
+
+@media (max-width: 720px) {
+    .gen-grid-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+.gen-card {
+    padding: 30px 26px;
+    background: var(--brand-elev);
+    border: 1px solid var(--brand-border);
+    border-radius: 16px;
+    box-shadow: var(--brand-shadow);
+    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.gen-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--brand-primary);
+    box-shadow: 0 16px 40px color-mix(in srgb, var(--brand-primary) 18%, transparent);
+}
+
+.gen-card__icon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, var(--brand-primary) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--brand-primary) 28%, transparent);
+    border-radius: 14px;
+    color: var(--brand-primary-500);
+    font-size: 20px;
+    margin-bottom: 18px;
+}
+
+.gen-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 10px;
+    color: var(--brand-fg);
+}
+
+.gen-card p {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--brand-muted);
+    margin: 0;
+}
+
+/* ── Checklist — two-column bulleted list ── */
+.checklist {
+    list-style: none;
+    padding: 0;
+    margin: 40px auto 0;
+    max-width: 900px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+@media (max-width: 640px) {
+    .checklist { grid-template-columns: 1fr; }
+}
+
+.checklist li {
+    position: relative;
+    padding: 16px 18px 16px 54px;
+    background: var(--brand-elev);
+    border: 1px solid var(--brand-border);
+    border-radius: 12px;
+    font-size: 15px;
+    color: var(--brand-fg);
+    line-height: 1.5;
+    box-shadow: var(--brand-shadow);
+    transition: border-color var(--transition), transform var(--transition);
+}
+
+.checklist li:hover {
+    transform: translateX(3px);
+    border-color: color-mix(in srgb, var(--brand-success) 40%, var(--brand-border));
+}
+
+.checklist li::before {
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, var(--brand-success) 16%, transparent);
+    border: 1px solid color-mix(in srgb, var(--brand-success) 35%, transparent);
+    border-radius: 50%;
+    color: var(--brand-success);
+    font-size: 11px;
+}
+
+/* ── Info Table (source coverage, scoring factors, etc.) ── */
+.info-table {
+    width: 100%;
+    max-width: 960px;
+    margin: 56px auto 0;
+    background: var(--brand-elev);
+    border: 1px solid var(--brand-border);
+    border-radius: 16px;
+    overflow: hidden;
+    border-collapse: collapse;
+    box-shadow: var(--brand-shadow);
+}
+
+.info-table th,
+.info-table td {
+    padding: 18px 24px;
+    text-align: left;
+    border-bottom: 1px solid var(--brand-border);
+}
+
+.info-table th {
+    background: var(--brand-elev-2);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--brand-primary-500);
+}
+
+.info-table td {
+    font-size: 15px;
+    color: var(--brand-muted);
+}
+
+.info-table td:first-child {
+    font-weight: 600;
+    color: var(--brand-fg);
+    width: 34%;
+}
+
+.info-table tr:last-child td {
+    border-bottom: none;
+}
+
+.info-table tbody tr {
+    transition: background var(--transition);
+}
+
+.info-table tbody tr:hover {
+    background: color-mix(in srgb, var(--brand-primary) 4%, transparent);
+}
+
+@media (max-width: 640px) {
+    .info-table th,
+    .info-table td {
+        padding: 14px 16px;
+        font-size: 13.5px;
+    }
+    .info-table td:first-child {
+        width: 40%;
+    }
+}
+
+/* ── Lifecycle chain (horizontal arrow of pills) ── */
+.lifecycle-chain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 36px 24px;
+    background: var(--brand-elev);
+    border: 1px solid var(--brand-border);
+    border-radius: 18px;
+    max-width: 1100px;
+    margin: 48px auto 0;
+    box-shadow: var(--brand-shadow);
+}
+
+.lifecycle-node {
+    padding: 12px 22px;
+    background: color-mix(in srgb, var(--brand-primary) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--brand-primary) 35%, transparent);
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--brand-primary-500);
+    white-space: nowrap;
+}
+
+.lifecycle-arrow {
+    color: color-mix(in srgb, var(--brand-primary) 55%, transparent);
+    font-size: 13px;
+}

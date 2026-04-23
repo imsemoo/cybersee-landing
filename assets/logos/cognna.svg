@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 40" width="160" height="40" role="img" aria-label="COGNNA">
+    <rect x="4" y="4" width="32" height="32" rx="8" fill="#0EA5E9"/>
+    <text x="20" y="20" fill="#ffffff"
+          font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="800"
+          text-anchor="middle" dominant-baseline="central"
+          style="letter-spacing: -0.02em;">C</text>
+    <text x="46" y="25" fill="#0EA5E9"
+          font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="800"
+          letter-spacing="1px"
+          style="text-transform: uppercase;">COGNNA</text>
+</svg>

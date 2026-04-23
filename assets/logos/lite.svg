@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 40" width="160" height="40" role="img" aria-label="Lite">
+    <rect x="4" y="4" width="32" height="32" rx="8" fill="#475569"/>
+    <text x="20" y="20" fill="#ffffff"
+          font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="800"
+          text-anchor="middle" dominant-baseline="central"
+          style="letter-spacing: -0.02em;">L</text>
+    <text x="46" y="26" fill="#475569"
+          font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="700"
+          letter-spacing="0"
+          style="text-transform: none;">Lite</text>
+</svg>

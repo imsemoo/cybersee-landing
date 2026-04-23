@@ -65,10 +65,18 @@
                         <a href="contact.html" class="navbar__dropdown-item">Contact</a>
                     </div>
                 </li>
+                <li class="navbar__mobile-cta">
+                    <a href="https://calendly.com/m-alsalahi-cybersee/30min?month=2026-04" class="btn btn--primary" target="_blank" rel="noopener">
+                        <i class="fas fa-calendar"></i> Book a Demo
+                    </a>
+                    <a href="contact.html" class="btn btn--secondary">Request Free Exposure Scan</a>
+                </li>
             </ul>
             <div class="navbar__actions">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                    <i class="fas fa-moon" id="themeIcon"></i>
+                <button class="theme-toggle" id="themeToggle" role="switch" aria-label="Toggle theme">
+                    <span class="theme-toggle__thumb" aria-hidden="true"></span>
+                    <i class="fas fa-sun theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true"></i>
+                    <i class="fas fa-moon theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true"></i>
                 </button>
                 <a href="contact.html" class="btn btn--secondary btn--sm">Request Free Exposure Scan</a>
                 <a href="https://calendly.com/m-alsalahi-cybersee/30min?month=2026-04" class="btn btn--primary btn--sm" target="_blank" rel="noopener">Book a Demo</a>
@@ -175,11 +183,32 @@
     <section class="subpage-section">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
-                <span class="section-tag">Why Coverage Matters</span>
-                <h2 class="section-title">Early Warning Before<br><span class="gradient-text">an Incident Escalates</span></h2>
-                <p class="section-desc">Dark web signals often appear days or weeks before an actual attack. Cybersee surfaces these signals with context, evidence, and confidence indicators — so your team can act before the damage is done.</p>
+                <span class="section-tag">Layers of the Web</span>
+                <h2 class="section-title">Most Threats Live<br><span class="gradient-text">Beneath the Surface</span></h2>
+                <p class="section-desc">Dark web signals often appear days or weeks before an actual attack. Cybersee monitors every layer &mdash; with context, evidence, and confidence indicators so your team can act before the damage is done.</p>
             </div>
 
+            <div class="viz-iceberg" data-aos="fade-up" data-aos-delay="100">
+                <div class="viz-iceberg__wave"></div>
+                <div class="viz-iceberg__layer viz-iceberg__layer--surface">
+                    <div class="viz-iceberg__icon"><i class="fas fa-globe"></i></div>
+                    <span class="viz-iceberg__badge">Surface Web &middot; ~4%</span>
+                    <h3 class="viz-iceberg__title">Indexed &amp; Public</h3>
+                    <p class="viz-iceberg__desc">Social platforms, paste sites, public forums, app stores. Cybersee tracks brand mentions, leaked snippets, rogue apps, and impersonation accounts.</p>
+                </div>
+                <div class="viz-iceberg__layer viz-iceberg__layer--deep">
+                    <div class="viz-iceberg__icon"><i class="fas fa-water"></i></div>
+                    <span class="viz-iceberg__badge">Deep Web &middot; Gated</span>
+                    <h3 class="viz-iceberg__title">Private Forums &amp; Telegram</h3>
+                    <p class="viz-iceberg__desc">Invitation-only channels, private breach databases, paywalled threat-actor forums. Cybersee analysts access these through managed sources.</p>
+                </div>
+                <div class="viz-iceberg__layer viz-iceberg__layer--dark">
+                    <div class="viz-iceberg__icon"><i class="fas fa-skull-crossbones"></i></div>
+                    <span class="viz-iceberg__badge">Dark Web &middot; Tor / I2P</span>
+                    <h3 class="viz-iceberg__title">Marketplaces &amp; Leak Sites</h3>
+                    <p class="viz-iceberg__desc">Ransomware blogs, stealer log marketplaces, combo list dumps, exploit trading. Continuous ingestion of onion-site content relevant to your brand.</p>
+                </div>
+            </div>
         </div>
     </section>
 

@@ -65,10 +65,18 @@
                         <a href="pages/contact.html" class="navbar__dropdown-item">Contact</a>
                     </div>
                 </li>
+                <li class="navbar__mobile-cta">
+                    <a href="https://calendly.com/m-alsalahi-cybersee/30min?month=2026-04" class="btn btn--primary" target="_blank" rel="noopener">
+                        <i class="fas fa-calendar"></i> Book a Demo
+                    </a>
+                    <a href="#contact" class="btn btn--secondary">Request Free Exposure Scan</a>
+                </li>
             </ul>
             <div class="navbar__actions">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                    <i class="fas fa-moon" id="themeIcon"></i>
+                <button class="theme-toggle" id="themeToggle" role="switch" aria-label="Toggle theme">
+                    <span class="theme-toggle__thumb" aria-hidden="true"></span>
+                    <i class="fas fa-sun theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true"></i>
+                    <i class="fas fa-moon theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true"></i>
                 </button>
                 <a href="#contact" class="btn btn--secondary btn--sm">Request Free Exposure Scan</a>
                 <a href="https://calendly.com/m-alsalahi-cybersee/30min?month=2026-04" class="btn btn--primary btn--sm" target="_blank" rel="noopener">Book a Demo</a>
@@ -139,17 +147,17 @@
         <div class="container">
             <p class="trusted__label">Trusted By</p>
             <div class="trusted__logos">
-                <img src="assets/logos/cognna.svg"       alt="Cognna"        class="trusted__logo" loading="lazy" width="160" height="40">
-                <img src="assets/logos/cyberxi.svg"      alt="CyberXi"       class="trusted__logo" loading="lazy" width="160" height="40">
-                <img src="assets/logos/uqu.svg"          alt="Umm Al-Qura University" class="trusted__logo" loading="lazy" width="160" height="40">
-                <img src="assets/logos/zid.svg"          alt="Zid"           class="trusted__logo" loading="lazy" width="160" height="40">
-                <img src="assets/logos/marn.svg"         alt="Marn"          class="trusted__logo" loading="lazy" width="160" height="40">
-                <img src="assets/logos/ejabiah.svg"      alt="Ejabiah"       class="trusted__logo" loading="lazy" width="160" height="40">
-                <img src="assets/logos/trell.svg"        alt="Trell"         class="trusted__logo" loading="lazy" width="160" height="40">
-                <img src="assets/logos/lite.svg"         alt="Lite"          class="trusted__logo" loading="lazy" width="160" height="40">
-                <img src="assets/logos/aljeraisy-hr.svg" alt="Aljeraisy HR"  class="trusted__logo" loading="lazy" width="174" height="40">
-                <img src="assets/logos/flat6labs.svg"    alt="Flat6Labs"     class="trusted__logo" loading="lazy" width="160" height="40">
-                <img src="assets/logos/inspireu.svg"     alt="InspireU"      class="trusted__logo" loading="lazy" width="160" height="40">
+                <img src="assets/logos/cognna.png"       alt="Cognna"        class="trusted__logo" loading="lazy" width="200" height="60">
+                <img src="assets/logos/cyberxi.png"      alt="CyberXi"       class="trusted__logo" loading="lazy" width="200" height="60">
+                <img src="assets/logos/uqu.png"          alt="Umm Al-Qura University" class="trusted__logo" loading="lazy" width="200" height="60">
+                <img src="assets/logos/zid.png"          alt="Zid"           class="trusted__logo" loading="lazy" width="200" height="60">
+                <img src="assets/logos/marn.png"         alt="Marn"          class="trusted__logo" loading="lazy" width="200" height="60">
+                <img src="assets/logos/ejabiah.png"      alt="Ejabiah"       class="trusted__logo" loading="lazy" width="200" height="60">
+                <img src="assets/logos/trell.png"        alt="Trell"         class="trusted__logo" loading="lazy" width="200" height="60">
+                <img src="assets/logos/lite.png"         alt="Lite"          class="trusted__logo" loading="lazy" width="200" height="60">
+                <img src="assets/logos/aljeraisy-hr.png" alt="Aljeraisy HR"  class="trusted__logo" loading="lazy" width="200" height="60">
+                <img src="assets/logos/flat6labs.png"    alt="Flat6Labs"     class="trusted__logo" loading="lazy" width="200" height="60">
+                <img src="assets/logos/inspireu.png"     alt="InspireU"      class="trusted__logo" loading="lazy" width="200" height="60">
             </div>
         </div>
     </section>
@@ -389,23 +397,89 @@
          CTA — Final push
          ============================================================ -->
     <section class="cta" id="contact">
-        <div class="cta__bg-effects">
+        <div class="cta__bg" aria-hidden="true">
+            <div class="cta__grid-pattern"></div>
             <div class="cta__orb cta__orb--1"></div>
             <div class="cta__orb cta__orb--2"></div>
+            <div class="cta__beam"></div>
         </div>
         <div class="container">
-            <div class="cta__content" data-aos="zoom-in">
-                <h2 class="cta__title">See How Cybersee Fits Into<br><span class="gradient-text">Your Security Workflow</span></h2>
-                <p class="cta__desc">Get a tailored walkthrough of how Cybersee can detect, validate, and respond to the external threats targeting your brand, people, and assets.</p>
-                <div class="cta__buttons">
-                    <a href="https://calendly.com/m-alsalahi-cybersee/30min?month=2026-04" class="btn btn--primary btn--lg" target="_blank" rel="noopener">
-                        <i class="fas fa-calendar"></i>
-                        Book a Demo
-                    </a>
-                    <a href="#contact-form" class="btn btn--ghost btn--lg">
-                        Request Free Exposure Scan
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
+            <div class="cta__wrap">
+                <div class="cta__left" data-aos="fade-right">
+                    <div class="cta__badge">
+                        <span class="cta__badge-pulse"></span>
+                        <span>Free Exposure Scan &middot; No commitment required</span>
+                    </div>
+                    <h2 class="cta__title">See What's Exposed About Your Brand<br><span class="gradient-text">Before Attackers Do.</span></h2>
+                    <p class="cta__desc">Get a tailored 30-minute walkthrough of how Cybersee detects, validates, and responds to the external threats targeting your brand, people, and digital assets.</p>
+                    <div class="cta__buttons">
+                        <a href="https://calendly.com/m-alsalahi-cybersee/30min?month=2026-04" class="btn btn--primary btn--lg" target="_blank" rel="noopener">
+                            <i class="fas fa-calendar"></i>
+                            Book a Demo
+                        </a>
+                        <a href="pages/contact.html" class="btn btn--ghost btn--lg">
+                            Request Free Scan
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="cta__trust">
+                        <div class="cta__trust-item"><i class="fas fa-shield-halved"></i> Saudi-hosted infrastructure</div>
+                        <div class="cta__trust-item"><i class="fas fa-user-shield"></i> 24/7 SOC analysts</div>
+                        <div class="cta__trust-item"><i class="fas fa-bullseye"></i> Tailored to your sector</div>
+                    </div>
+                </div>
+
+                <div class="cta__right" data-aos="fade-left" data-aos-delay="150">
+                    <div class="cta__scan">
+                        <div class="cta__scan-glow"></div>
+                        <div class="cta__scan-header">
+                            <div class="cta__scan-title">
+                                <i class="fas fa-satellite-dish"></i>
+                                <span>Exposure Scan Preview</span>
+                            </div>
+                            <div class="cta__scan-status">
+                                <span class="cta__scan-dot"></span>
+                                LIVE
+                            </div>
+                        </div>
+                        <div class="cta__scan-target">
+                            <i class="fas fa-globe"></i>
+                            <span>yourbrand.com</span>
+                            <span class="cta__scan-chip">Monitoring</span>
+                        </div>
+                        <div class="cta__scan-body">
+                            <div class="cta__scan-row cta__scan-row--critical">
+                                <div class="cta__scan-icon"><i class="fas fa-key"></i></div>
+                                <div class="cta__scan-info">
+                                    <div class="cta__scan-label">Leaked credentials found</div>
+                                    <div class="cta__scan-value">247 records &middot; dark web sources</div>
+                                </div>
+                                <span class="cta__scan-badge cta__scan-badge--critical">Critical</span>
+                            </div>
+                            <div class="cta__scan-row cta__scan-row--high">
+                                <div class="cta__scan-icon"><i class="fas fa-fish"></i></div>
+                                <div class="cta__scan-info">
+                                    <div class="cta__scan-label">Phishing domains detected</div>
+                                    <div class="cta__scan-value">12 active &middot; takedown ready</div>
+                                </div>
+                                <span class="cta__scan-badge cta__scan-badge--high">High</span>
+                            </div>
+                            <div class="cta__scan-row cta__scan-row--medium">
+                                <div class="cta__scan-icon"><i class="fas fa-user-secret"></i></div>
+                                <div class="cta__scan-info">
+                                    <div class="cta__scan-label">Impersonation accounts</div>
+                                    <div class="cta__scan-value">5 social profiles flagged</div>
+                                </div>
+                                <span class="cta__scan-badge cta__scan-badge--medium">Medium</span>
+                            </div>
+                        </div>
+                        <div class="cta__scan-footer">
+                            <div class="cta__scan-progress">
+                                <div class="cta__scan-progress-bar"></div>
+                            </div>
+                            <span>Scanning digital footprint&hellip;</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

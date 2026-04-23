@@ -65,10 +65,18 @@
                         <a href="contact.html" class="navbar__dropdown-item">Contact</a>
                     </div>
                 </li>
+                <li class="navbar__mobile-cta">
+                    <a href="https://calendly.com/m-alsalahi-cybersee/30min?month=2026-04" class="btn btn--primary" target="_blank" rel="noopener">
+                        <i class="fas fa-calendar"></i> Book a Demo
+                    </a>
+                    <a href="contact.html" class="btn btn--secondary">Request Free Exposure Scan</a>
+                </li>
             </ul>
             <div class="navbar__actions">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                    <i class="fas fa-moon" id="themeIcon"></i>
+                <button class="theme-toggle" id="themeToggle" role="switch" aria-label="Toggle theme">
+                    <span class="theme-toggle__thumb" aria-hidden="true"></span>
+                    <i class="fas fa-sun theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true"></i>
+                    <i class="fas fa-moon theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true"></i>
                 </button>
                 <a href="contact.html" class="btn btn--secondary btn--sm">Request Free Exposure Scan</a>
                 <a href="https://calendly.com/m-alsalahi-cybersee/30min?month=2026-04" class="btn btn--primary btn--sm" target="_blank" rel="noopener">Book a Demo</a>
@@ -171,10 +179,32 @@
         <div class="container">
             <div class="section-header" data-aos="fade-up">
                 <span class="section-tag">Customer Outcomes</span>
-                <h2 class="section-title">What Teams<br><span class="gradient-text">Tell Us</span></h2>
-                <p class="section-desc">Security teams using Cybersee report faster detection of leaked credentials, shorter time-to-takedown for phishing, and clearer executive reporting on external risk posture — with less noise across their alert queues.</p>
+                <h2 class="section-title">Measurable Impact<br><span class="gradient-text">on Security Operations</span></h2>
+                <p class="section-desc">Security teams using Cybersee report faster detection of leaked credentials, shorter time-to-takedown for phishing, and clearer executive reporting on external risk posture &mdash; with less noise across their alert queues.</p>
             </div>
 
+            <div class="viz-stats" data-aos="fade-up" data-aos-delay="100">
+                <div class="viz-stats__item">
+                    <div class="viz-stats__icon"><i class="fas fa-stopwatch"></i></div>
+                    <div class="viz-stats__num">68%</div>
+                    <div class="viz-stats__label">Faster Detection</div>
+                </div>
+                <div class="viz-stats__item">
+                    <div class="viz-stats__icon"><i class="fas fa-gavel"></i></div>
+                    <div class="viz-stats__num">3.4&times;</div>
+                    <div class="viz-stats__label">Takedown Throughput</div>
+                </div>
+                <div class="viz-stats__item">
+                    <div class="viz-stats__icon"><i class="fas fa-filter"></i></div>
+                    <div class="viz-stats__num">-72%</div>
+                    <div class="viz-stats__label">Alert Noise</div>
+                </div>
+                <div class="viz-stats__item">
+                    <div class="viz-stats__icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="viz-stats__num">98%</div>
+                    <div class="viz-stats__label">Exec Reporting SLA</div>
+                </div>
+            </div>
         </div>
     </section>
 

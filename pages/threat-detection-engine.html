@@ -65,10 +65,18 @@
                         <a href="contact.html" class="navbar__dropdown-item">Contact</a>
                     </div>
                 </li>
+                <li class="navbar__mobile-cta">
+                    <a href="https://calendly.com/m-alsalahi-cybersee/30min?month=2026-04" class="btn btn--primary" target="_blank" rel="noopener">
+                        <i class="fas fa-calendar"></i> Book a Demo
+                    </a>
+                    <a href="contact.html" class="btn btn--secondary">Request Free Exposure Scan</a>
+                </li>
             </ul>
             <div class="navbar__actions">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                    <i class="fas fa-moon" id="themeIcon"></i>
+                <button class="theme-toggle" id="themeToggle" role="switch" aria-label="Toggle theme">
+                    <span class="theme-toggle__thumb" aria-hidden="true"></span>
+                    <i class="fas fa-sun theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true"></i>
+                    <i class="fas fa-moon theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true"></i>
                 </button>
                 <a href="#contact" class="btn btn--secondary btn--sm">Request Free Exposure Scan</a>
                 <a href="https://calendly.com/m-alsalahi-cybersee/30min?month=2026-04" class="btn btn--primary btn--sm" target="_blank" rel="noopener">Book a Demo</a>
@@ -170,9 +178,62 @@
     <section class="subpage-section">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
-                <span class="section-tag">Why Coverage Matters</span>
+                <span class="section-tag">Live Coverage</span>
                 <h2 class="section-title">One Platform,<br><span class="gradient-text">Unified Signal Flow</span></h2>
-                <p class="section-desc">External threats are fragmented across forums, marketplaces, phishing infrastructure, social platforms, app stores, and exposed internet-facing assets. Cybersee brings these signals into one platform so security teams can act faster.</p>
+                <p class="section-desc">External threats are fragmented across forums, marketplaces, phishing infrastructure, social platforms, app stores, and exposed internet-facing assets. Cybersee brings every signal into one continuously-scanning platform.</p>
+            </div>
+
+            <div class="viz-radar" data-aos="fade-up" data-aos-delay="100">
+                <div class="viz-radar__canvas">
+                    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="radarSweep" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stop-color="var(--brand-primary)" stop-opacity="0"/>
+                                <stop offset="100%" stop-color="var(--brand-primary)" stop-opacity="0.55"/>
+                            </linearGradient>
+                        </defs>
+
+                        <circle class="viz-radar__ring" cx="200" cy="200" r="180"/>
+                        <circle class="viz-radar__ring" cx="200" cy="200" r="130"/>
+                        <circle class="viz-radar__ring" cx="200" cy="200" r="80"/>
+                        <circle class="viz-radar__ring" cx="200" cy="200" r="30"/>
+
+                        <line class="viz-radar__axis" x1="20" y1="200" x2="380" y2="200"/>
+                        <line class="viz-radar__axis" x1="200" y1="20" x2="200" y2="380"/>
+
+                        <g class="viz-radar__sweep">
+                            <path d="M200,200 L380,200 A180,180 0 0,0 327,73 Z" fill="url(#radarSweep)"/>
+                        </g>
+
+                        <text class="viz-radar__label" x="390" y="204" text-anchor="end">DARK WEB</text>
+                        <text class="viz-radar__label" x="204" y="18">BRAND</text>
+                        <text class="viz-radar__label" x="10" y="204">SOCIAL</text>
+                        <text class="viz-radar__label" x="204" y="394">SURFACE</text>
+
+                        <circle class="viz-radar__dot viz-radar__dot--critical" cx="290" cy="140" r="6"/>
+                        <circle class="viz-radar__dot viz-radar__dot--high" cx="130" cy="260" r="5"/>
+                        <circle class="viz-radar__dot viz-radar__dot--critical" cx="310" cy="270" r="6"/>
+                        <circle class="viz-radar__dot viz-radar__dot--medium" cx="160" cy="130" r="5"/>
+                        <circle class="viz-radar__dot viz-radar__dot--high" cx="240" cy="310" r="5"/>
+
+                        <circle class="viz-radar__center-pulse" cx="200" cy="200" r="10"/>
+                        <circle class="viz-radar__center" cx="200" cy="200" r="6"/>
+                    </svg>
+                </div>
+                <div class="viz-radar__legend">
+                    <div class="viz-radar__legend-item">
+                        <span class="viz-radar__legend-dot viz-radar__legend-dot--critical"></span>
+                        Critical &middot; 12 today
+                    </div>
+                    <div class="viz-radar__legend-item">
+                        <span class="viz-radar__legend-dot viz-radar__legend-dot--high"></span>
+                        High &middot; 34 today
+                    </div>
+                    <div class="viz-radar__legend-item">
+                        <span class="viz-radar__legend-dot viz-radar__legend-dot--medium"></span>
+                        Medium &middot; 201 today
+                    </div>
+                </div>
             </div>
         </div>
     </section>

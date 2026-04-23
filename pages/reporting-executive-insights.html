@@ -65,10 +65,18 @@
                         <a href="contact.html" class="navbar__dropdown-item">Contact</a>
                     </div>
                 </li>
+                <li class="navbar__mobile-cta">
+                    <a href="https://calendly.com/m-alsalahi-cybersee/30min?month=2026-04" class="btn btn--primary" target="_blank" rel="noopener">
+                        <i class="fas fa-calendar"></i> Book a Demo
+                    </a>
+                    <a href="contact.html" class="btn btn--secondary">Request Free Exposure Scan</a>
+                </li>
             </ul>
             <div class="navbar__actions">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                    <i class="fas fa-moon" id="themeIcon"></i>
+                <button class="theme-toggle" id="themeToggle" role="switch" aria-label="Toggle theme">
+                    <span class="theme-toggle__thumb" aria-hidden="true"></span>
+                    <i class="fas fa-sun theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true"></i>
+                    <i class="fas fa-moon theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true"></i>
                 </button>
                 <a href="#contact" class="btn btn--secondary btn--sm">Request Free Exposure Scan</a>
                 <a href="https://calendly.com/m-alsalahi-cybersee/30min?month=2026-04" class="btn btn--primary btn--sm" target="_blank" rel="noopener">Book a Demo</a>
@@ -95,6 +103,59 @@
             <p class="subpage-hero__subtitle" data-aos="fade-up" data-aos-delay="100">
                 Cybersee helps security teams communicate external risk through dashboards, summaries, evidence, trends, and reports built for technical and non-technical stakeholders.
             </p>
+        </div>
+    </section>
+
+    <!-- ===== 0. LIVE REPORT SNAPSHOT ===== -->
+    <section class="subpage-section subpage-section--alt">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">This Month's Snapshot</span>
+                <h2 class="section-title">See Your Risk<br><span class="gradient-text">Mix at a Glance</span></h2>
+                <p class="section-desc">Every executive report opens with a visual breakdown of detected threats by category &mdash; so stakeholders see where risk is concentrated without reading the full report.</p>
+            </div>
+
+            <div class="viz-donut" data-aos="fade-up" data-aos-delay="100">
+                <div class="viz-donut__chart">
+                    <svg viewBox="0 0 120 120">
+                        <circle class="viz-donut__track" cx="60" cy="60" r="45"/>
+                        <circle class="viz-donut__seg" cx="60" cy="60" r="45" stroke="#ef4444"
+                            stroke-dasharray="102 283" stroke-dashoffset="0"/>
+                        <circle class="viz-donut__seg" cx="60" cy="60" r="45" stroke="#f59e0b"
+                            stroke-dasharray="76 283" stroke-dashoffset="-102" style="animation-delay: 0.15s"/>
+                        <circle class="viz-donut__seg" cx="60" cy="60" r="45" stroke="#3b82f6"
+                            stroke-dasharray="57 283" stroke-dashoffset="-178" style="animation-delay: 0.3s"/>
+                        <circle class="viz-donut__seg" cx="60" cy="60" r="45" stroke="#22c55e"
+                            stroke-dasharray="48 283" stroke-dashoffset="-235" style="animation-delay: 0.45s"/>
+                    </svg>
+                    <div class="viz-donut__center">
+                        <div class="viz-donut__total">1,247</div>
+                        <div class="viz-donut__label">Findings</div>
+                    </div>
+                </div>
+                <div class="viz-donut__legend">
+                    <div class="viz-donut__legend-item" style="border-left-color: #ef4444;">
+                        <span class="viz-donut__legend-swatch" style="background: #ef4444;"></span>
+                        <span class="viz-donut__legend-name">Credential Leaks</span>
+                        <span class="viz-donut__legend-val">36%</span>
+                    </div>
+                    <div class="viz-donut__legend-item" style="border-left-color: #f59e0b;">
+                        <span class="viz-donut__legend-swatch" style="background: #f59e0b;"></span>
+                        <span class="viz-donut__legend-name">Phishing Domains</span>
+                        <span class="viz-donut__legend-val">27%</span>
+                    </div>
+                    <div class="viz-donut__legend-item" style="border-left-color: #3b82f6;">
+                        <span class="viz-donut__legend-swatch" style="background: #3b82f6;"></span>
+                        <span class="viz-donut__legend-name">Brand Impersonation</span>
+                        <span class="viz-donut__legend-val">20%</span>
+                    </div>
+                    <div class="viz-donut__legend-item" style="border-left-color: #22c55e;">
+                        <span class="viz-donut__legend-swatch" style="background: #22c55e;"></span>
+                        <span class="viz-donut__legend-name">Exposed Assets</span>
+                        <span class="viz-donut__legend-val">17%</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

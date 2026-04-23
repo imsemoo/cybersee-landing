@@ -24,16 +24,23 @@ document.addEventListener('DOMContentLoaded', () => {
     html.setAttribute('data-bs-theme', savedTheme);
     updateThemeIcon(savedTheme);
 
-    themeToggle.addEventListener('click', () => {
-        const current = html.getAttribute('data-bs-theme');
-        const next = current === 'dark' ? 'light' : 'dark';
-        html.setAttribute('data-bs-theme', next);
-        localStorage.setItem('cybersee-theme', next);
-        updateThemeIcon(next);
-    });
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const current = html.getAttribute('data-bs-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-bs-theme', next);
+            localStorage.setItem('cybersee-theme', next);
+            updateThemeIcon(next);
+            themeToggle.setAttribute('aria-checked', next === 'dark');
+        });
+        themeToggle.setAttribute('aria-checked', savedTheme === 'dark');
+    }
 
     function updateThemeIcon(theme) {
-        themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        // Legacy single-icon structure (subpages not yet migrated)
+        if (themeIcon) {
+            themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
     }
 
     // ===== NAVBAR SCROLL =====

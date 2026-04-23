@@ -243,22 +243,43 @@ img { max-width: 100%; display: block; }
 
 .section-header {
     text-align: center;
-    max-width: 720px;
+    max-width: 760px;
     margin: 0 auto 64px;
 }
 
 .section-tag {
-    display: inline-block;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--brand-primary-500);
-    background: var(--brand-primary-50);
-    border: 1px solid var(--brand-primary-100);
-    padding: 6px 16px;
+    background: linear-gradient(135deg,
+        color-mix(in srgb, var(--brand-primary) 12%, transparent),
+        color-mix(in srgb, var(--brand-primary) 4%, transparent));
+    border: 1px solid color-mix(in srgb, var(--brand-primary) 30%, transparent);
+    padding: 7px 18px 7px 14px;
     border-radius: var(--ui-radius-pill);
     margin-bottom: var(--ui-space-5);
+    box-shadow: 0 4px 14px -6px color-mix(in srgb, var(--brand-primary) 45%, transparent);
+}
+
+.section-tag::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--brand-primary);
+    box-shadow: 0 0 0 0 var(--brand-primary);
+    animation: sectionTagPulse 2.2s ease-out infinite;
+}
+
+@keyframes sectionTagPulse {
+    0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--brand-primary) 60%, transparent); }
+    100% { box-shadow: 0 0 0 8px transparent; }
 }
 
 .section-title {
@@ -266,6 +287,7 @@ img { max-width: 100%; display: block; }
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 700;
     line-height: 1.2;
+    letter-spacing: -0.02em;
     margin-bottom: var(--ui-space-4);
 }
 
@@ -273,6 +295,20 @@ img { max-width: 100%; display: block; }
     font-size: 1.05rem;
     color: var(--brand-muted);
     line-height: 1.7;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.section-header > .section-desc:last-child::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 3px;
+    margin: 28px auto 0;
+    background: linear-gradient(90deg, transparent, var(--brand-primary), transparent);
+    border-radius: 2px;
 }
 
 
@@ -423,25 +459,68 @@ html[data-bs-theme="light"] .logo-img--light { display: block; }
     flex-shrink: 0;
 }
 
-/* Theme toggle */
+/* Theme toggle — segmented sun/moon switch */
 .theme-toggle {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
+    position: relative;
+    width: 62px;
+    height: 32px;
+    padding: 3px;
+    border-radius: 999px;
     border: 1px solid var(--brand-border);
     background: var(--brand-elev);
-    color: var(--brand-muted);
     cursor: pointer;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    font-size: 0.875rem;
-    transition: all var(--transition);
+    justify-content: space-between;
+    transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+    flex-shrink: 0;
 }
+
 .theme-toggle:hover {
-    border-color: var(--brand-primary-400);
-    color: var(--brand-primary-500);
-    background: var(--brand-primary-50);
+    border-color: color-mix(in srgb, var(--brand-primary) 60%, var(--brand-border));
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-primary) 12%, transparent);
+}
+
+.theme-toggle:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-primary) 35%, transparent);
+}
+
+.theme-toggle__thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--brand-primary), color-mix(in srgb, var(--brand-primary) 55%, #22d3ee));
+    box-shadow:
+        0 2px 6px color-mix(in srgb, var(--brand-primary) 50%, transparent),
+        0 0 0 1px color-mix(in srgb, var(--brand-primary) 30%, transparent);
+    transition: transform var(--transition);
+    pointer-events: none;
+}
+
+html[data-bs-theme="dark"] .theme-toggle__thumb { transform: translateX(30px); }
+html[data-bs-theme="light"] .theme-toggle__thumb { transform: translateX(0); }
+
+.theme-toggle__icon {
+    position: relative;
+    z-index: 1;
+    width: 24px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--brand-muted);
+    pointer-events: none;
+    transition: color var(--transition);
+}
+
+html[data-bs-theme="light"] .theme-toggle__icon--sun {
+    color: white;
+}
+
+html[data-bs-theme="dark"] .theme-toggle__icon--moon {
+    color: white;
 }
 
 /* Burger */
@@ -852,7 +931,7 @@ html[data-bs-theme="light"] .logo-img--light { display: block; }
 
 /* Pipeline layout */
 .pipeline {
-    max-width: 720px;
+    max-width: 760px;
     margin: 0 auto;
 }
 
@@ -1824,91 +1903,437 @@ html[data-bs-theme="light"] .logo-img--light { display: block; }
     position: relative;
     overflow: hidden;
     background: var(--brand-elev);
+    isolation: isolate;
 }
 
-.cta__bg-effects {
+/* Background layers */
+.cta__bg {
     position: absolute;
     inset: 0;
     pointer-events: none;
+    z-index: -1;
+}
+
+.cta__grid-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(var(--brand-border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--brand-border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.35;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000 40%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000 40%, transparent 100%);
 }
 
 .cta__orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.12;
+    filter: blur(90px);
+    opacity: 0.18;
 }
 
 .cta__orb--1 {
-    width: 400px;
-    height: 400px;
+    width: 520px;
+    height: 520px;
     background: var(--brand-primary);
-    top: -100px;
-    left: -100px;
+    top: -180px;
+    left: -140px;
 }
 
 .cta__orb--2 {
-    width: 300px;
-    height: 300px;
+    width: 420px;
+    height: 420px;
     background: var(--brand-warning);
-    bottom: -100px;
-    right: -100px;
+    bottom: -160px;
+    right: -120px;
+    opacity: 0.14;
 }
 
-.cta__content {
+.cta__beam {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 140%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--brand-primary), transparent);
+    transform: translate(-50%, -50%) rotate(-8deg);
+    opacity: 0.25;
+}
+
+/* Two-column wrap */
+.cta__wrap {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 64px;
+    align-items: center;
+}
+
+/* LEFT column */
+.cta__left {
     position: relative;
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto;
+}
+
+.cta__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ui-space-2);
+    padding: 8px 16px;
     background: var(--brand-elev-2);
     border: 1px solid var(--brand-border);
-    border-radius: var(--ui-radius-lg);
-    padding: 72px 48px;
-    box-shadow: var(--brand-shadow);
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--brand-fg);
+    margin-bottom: 24px;
+}
+
+.cta__badge-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--brand-success);
+    box-shadow: 0 0 0 0 var(--brand-success);
+    animation: ctaBadgePulse 2s ease-out infinite;
+}
+
+@keyframes ctaBadgePulse {
+    0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); }
+    100% { box-shadow: 0 0 0 12px rgba(34, 197, 94, 0); }
 }
 
 .cta__title {
     font-family: var(--font-base);
-    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-size: clamp(1.9rem, 3.6vw, 2.75rem);
     font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: var(--ui-space-4);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    color: var(--brand-fg);
 }
 
 .cta__desc {
-    font-size: 1rem;
+    font-size: 1.0625rem;
     color: var(--brand-muted);
-    margin-bottom: var(--ui-space-7);
-    line-height: 1.7;
+    line-height: 1.65;
+    margin-bottom: 32px;
+    max-width: 540px;
 }
 
 .cta__buttons {
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: var(--ui-space-4);
-    margin-bottom: 40px;
+    margin-bottom: 32px;
     flex-wrap: wrap;
 }
 
 .cta__trust {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--ui-space-7);
     flex-wrap: wrap;
+    gap: 12px 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--brand-border);
 }
 
 .cta__trust-item {
-    font-size: 0.8125rem;
-    color: var(--brand-text-tertiary);
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: var(--ui-space-2);
+    gap: 8px;
+    font-size: 0.875rem;
+    color: var(--brand-muted);
+    font-weight: 500;
 }
 
 .cta__trust-item i {
+    color: var(--brand-primary);
+    font-size: 0.9375rem;
+}
+
+/* RIGHT column — Scan preview card */
+.cta__right {
+    position: relative;
+}
+
+.cta__scan {
+    position: relative;
+    background: var(--brand-elev-2);
+    border: 1px solid var(--brand-border);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow:
+        0 20px 50px -20px rgba(0, 0, 0, 0.4),
+        0 0 0 1px var(--brand-border);
+    backdrop-filter: blur(12px);
+    overflow: hidden;
+}
+
+html[data-bs-theme="dark"] .cta__scan {
+    background: linear-gradient(180deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.85));
+    box-shadow:
+        0 30px 80px -30px rgba(0, 0, 0, 0.7),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.cta__scan-glow {
+    position: absolute;
+    top: -2px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--brand-primary), transparent);
+    opacity: 0.8;
+}
+
+.cta__scan-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--brand-border);
+    margin-bottom: 16px;
+}
+
+.cta__scan-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--brand-fg);
+}
+
+.cta__scan-title i {
+    color: var(--brand-primary);
+    font-size: 1rem;
+}
+
+.cta__scan-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 999px;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #ef4444;
+}
+
+.cta__scan-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ef4444;
+    animation: ctaScanBlink 1.2s ease-in-out infinite;
+}
+
+@keyframes ctaScanBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.cta__scan-target {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    background: var(--brand-elev);
+    border: 1px solid var(--brand-border);
+    border-radius: 10px;
+    margin-bottom: 14px;
+    font-family: var(--font-mono, 'Courier New', monospace);
+    font-size: 0.875rem;
+    color: var(--brand-fg);
+}
+
+.cta__scan-target i {
+    color: var(--brand-primary);
+}
+
+.cta__scan-chip {
+    margin-left: auto;
+    font-family: var(--font-base);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    background: rgba(34, 197, 94, 0.12);
     color: var(--brand-success);
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+}
+
+.cta__scan-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.cta__scan-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--brand-elev);
+    border: 1px solid var(--brand-border);
+    border-radius: 10px;
+    border-left-width: 3px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    animation: ctaScanRowIn 0.6s ease-out backwards;
+}
+
+.cta__scan-row:nth-child(1) { animation-delay: 0.3s; }
+.cta__scan-row:nth-child(2) { animation-delay: 0.6s; }
+.cta__scan-row:nth-child(3) { animation-delay: 0.9s; }
+
+@keyframes ctaScanRowIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.cta__scan-row:hover {
+    transform: translateX(2px);
+}
+
+.cta__scan-row--critical { border-left-color: #ef4444; }
+.cta__scan-row--high { border-left-color: #f59e0b; }
+.cta__scan-row--medium { border-left-color: #3b82f6; }
+
+.cta__scan-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: var(--brand-elev-2);
+    flex-shrink: 0;
+}
+
+.cta__scan-row--critical .cta__scan-icon { color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+.cta__scan-row--high .cta__scan-icon { color: #f59e0b; background: rgba(245, 158, 11, 0.1); }
+.cta__scan-row--medium .cta__scan-icon { color: #3b82f6; background: rgba(59, 130, 246, 0.1); }
+
+.cta__scan-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.cta__scan-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--brand-fg);
+    line-height: 1.3;
+}
+
+.cta__scan-value {
+    font-size: 0.75rem;
+    color: var(--brand-muted);
+    margin-top: 2px;
+}
+
+.cta__scan-badge {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.04em;
+    flex-shrink: 0;
+}
+
+.cta__scan-badge--critical { background: rgba(239, 68, 68, 0.12); color: #ef4444; }
+.cta__scan-badge--high { background: rgba(245, 158, 11, 0.12); color: #f59e0b; }
+.cta__scan-badge--medium { background: rgba(59, 130, 246, 0.12); color: #3b82f6; }
+
+.cta__scan-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 14px;
+    border-top: 1px solid var(--brand-border);
+    font-size: 0.75rem;
+    color: var(--brand-muted);
+}
+
+.cta__scan-progress {
+    flex: 1;
+    height: 4px;
+    background: var(--brand-elev);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.cta__scan-progress-bar {
+    height: 100%;
+    width: 40%;
+    background: linear-gradient(90deg, var(--brand-primary), #22d3ee);
+    border-radius: 2px;
+    animation: ctaScanProgress 2.4s ease-in-out infinite;
+}
+
+@keyframes ctaScanProgress {
+    0% { transform: translateX(-100%); width: 30%; }
+    50% { transform: translateX(100%); width: 40%; }
+    100% { transform: translateX(300%); width: 30%; }
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+    .cta__wrap {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .cta__left {
+        text-align: center;
+    }
+
+    .cta__desc {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .cta__buttons {
+        justify-content: center;
+    }
+
+    .cta__trust {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 560px) {
+    .cta__scan {
+        padding: 16px;
+    }
+
+    .cta__scan-row {
+        padding: 10px 12px;
+        gap: 10px;
+    }
+
+    .cta__scan-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 0.875rem;
+    }
+
+    .cta__scan-label {
+        font-size: 0.8125rem;
+    }
+
+    .cta__buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .cta__buttons .btn {
+        width: 100%;
+        justify-content: center;
+    }
 }
 
 
@@ -2177,11 +2602,11 @@ html[data-bs-theme="light"] .logo-img--light { display: block; }
     display: flex;
     flex-direction: column;
     gap: 12px;
-    max-width: 720px;
+    max-width: 760px;
     margin: 48px auto 0;
     width: 100%;
 }
-
+ا رم ون
 .threat-card {
     display: flex;
     align-items: center;
@@ -2677,30 +3102,29 @@ html[data-bs-theme="light"] .logo-img--light { display: block; }
 
 /* ── Trusted logos — SVG wordmarks ── */
 .trusted__logo {
-    height: 32px;
+    height: 48px;
     width: auto;
-    max-width: 160px;
+    max-width: 200px;
     object-fit: contain;
-    opacity: 0.7;
-    filter: grayscale(15%);
-    transition: opacity var(--transition), filter var(--transition), transform var(--transition);
+    opacity: 0.9;
+    transition: opacity var(--transition), transform var(--transition);
 }
 
 .trusted__logo:hover {
     opacity: 1;
-    filter: grayscale(0%);
     transform: translateY(-2px);
 }
 
-/* In dark theme, invert dark-brand logos slightly so navy/dark marks stay visible.
-   This is a safe fallback — the SVGs use currentColor-friendly hex that works
-   acceptably on both backgrounds at 70% opacity. */
+/* In dark theme, invert the logo so the dark placeholder text appears white-ish.
+   Works well for both neutral placeholders and real dark-on-white logos. */
 html[data-bs-theme="dark"] .trusted__logo {
-    filter: grayscale(10%) brightness(1.1);
+    filter: brightness(0) invert(1);
+    opacity: 0.7;
 }
 
 html[data-bs-theme="dark"] .trusted__logo:hover {
-    filter: grayscale(0%) brightness(1.2);
+    opacity: 1;
+    transform: translateY(-2px);
 }
 
 /* Legacy text-based logo fallback (kept in case some pages still use it) */
@@ -2767,4 +3191,221 @@ html[data-bs-theme="dark"] .trusted__logo:hover {
     justify-content: center;
     align-items: center;
     gap: 14px;
+}
+
+
+/* ============================================================
+   RESPONSIVE FIXES — Phase 3
+   Comprehensive mobile/tablet refinements across the landing
+   page and all subpages.
+   ============================================================ */
+
+/* ── Tablet (max 900px): navbar dropdowns collapse by default ── */
+@media (max-width: 900px) {
+    /* Inside mobile menu: dropdowns hidden by default, expand when parent is open */
+    .navbar__menu .navbar__dropdown {
+        display: none;
+    }
+    .navbar__menu .navbar__item.is-open > .navbar__dropdown {
+        display: block;
+    }
+    /* Bring back the chevron on the toggle button so users see it's expandable */
+    .navbar__menu .navbar__link--dropdown i {
+        display: inline-block;
+    }
+    /* Make dropdown toggles full-width rows in the mobile menu */
+    .navbar__menu .navbar__link--dropdown {
+        width: 100%;
+        justify-content: space-between;
+        padding: 14px 18px;
+        font-size: 1.05rem;
+    }
+    .navbar__menu .navbar__item {
+        width: 100%;
+        max-width: 420px;
+    }
+    .navbar__menu .navbar__dropdown-item {
+        padding: 10px 22px;
+        font-size: 0.95rem;
+    }
+}
+
+/* ── Mobile (max 768px): show CTAs in the mobile menu ── */
+@media (max-width: 768px) {
+    /* Show the CTAs again, but only when the mobile menu is active */
+    .navbar__menu.active ~ .navbar__actions .btn--secondary,
+    .navbar__menu.active ~ .navbar__actions .btn--primary {
+        display: none; /* still hidden from the collapsed bar */
+    }
+
+    /* Instead, put CTAs at the top of the open mobile menu via a dedicated block */
+    .navbar__menu.active {
+        padding: 80px 20px 40px;
+        overflow-y: auto;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 4px;
+    }
+
+    /* Mobile CTA pair rendered inside .navbar__menu (HTML update added below) */
+    .navbar__mobile-cta {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        max-width: 420px;
+        margin: 0 auto 20px;
+    }
+    .navbar__mobile-cta .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ── Hide mobile CTA block on desktop ── */
+@media (min-width: 769px) {
+    .navbar__mobile-cta {
+        display: none;
+    }
+}
+
+/* ── Hero: threat cards responsive ── */
+@media (max-width: 560px) {
+    .hero__threat-cards {
+        gap: 8px;
+        margin-top: 36px;
+    }
+    .threat-card {
+        padding: 12px 14px;
+        gap: 10px;
+        font-size: 13px;
+    }
+    .threat-card__msg {
+        font-size: 13px;
+        line-height: 1.4;
+    }
+    .threat-card__time {
+        font-size: 11px;
+    }
+    .threat-card__severity {
+        font-size: 9.5px;
+        padding: 3px 7px;
+    }
+}
+
+/* ── Hero: title smaller on very narrow screens ── */
+@media (max-width: 420px) {
+    .hero__title { font-size: 1.65rem; line-height: 1.25; }
+    .hero__subtitle { font-size: 0.95rem; }
+}
+
+/* ── Trust bar logos on mobile ── */
+@media (max-width: 768px) {
+    .trusted {
+        padding: 40px 0;
+    }
+    .trusted__logos {
+        gap: 10px;
+    }
+    .trusted__logo {
+        height: 38px;
+        max-width: 140px;
+    }
+}
+
+@media (max-width: 480px) {
+    .trusted__logo {
+        height: 32px;
+        max-width: 110px;
+    }
+}
+
+/* ── Section paddings tighter on mobile ── */
+@media (max-width: 768px) {
+    .problem,
+    .solution,
+    .dashboard-preview,
+    .under-hood {
+        padding: 60px 0;
+    }
+    .section-header {
+        margin-bottom: 36px;
+    }
+}
+
+/* ── Problem / Solution / Under-Hood cards: tighter padding on small ── */
+@media (max-width: 560px) {
+    .problem__grid--6 > .problem__card,
+    .solution__card,
+    .under-hood__card {
+        padding: 24px 20px;
+    }
+    .solution__card-icon,
+    .under-hood__card-icon {
+        width: 46px;
+        height: 46px;
+        font-size: 19px;
+        margin-bottom: 14px;
+    }
+    .solution__card-title,
+    .under-hood__card-title {
+        font-size: 17px;
+    }
+    .solution__card-text,
+    .under-hood__card-text,
+    .problem__grid--6 .problem__card-text {
+        font-size: 14px;
+    }
+}
+
+/* ── Dashboard preview tabs on mobile ── */
+@media (max-width: 640px) {
+    .dashboard-preview__tabs {
+        gap: 6px;
+        margin: 32px 0 24px;
+    }
+    .dashboard-preview__tab {
+        padding: 9px 16px;
+        font-size: 13px;
+    }
+    .dashboard-preview__frame-header {
+        padding: 10px 12px;
+    }
+    .dashboard-preview__url {
+        font-size: 10.5px;
+        margin-left: 10px;
+    }
+    .dashboard-preview__dot {
+        width: 9px;
+        height: 9px;
+    }
+}
+
+/* ── Final CTA buttons full-width on mobile ── */
+@media (max-width: 480px) {
+    .cta__title {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+    }
+    .cta__buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .cta__buttons .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ── Problem/Solution inline action buttons stack on narrow ── */
+@media (max-width: 480px) {
+    .problem__actions,
+    .solution__actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .problem__actions .btn,
+    .solution__actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
 }

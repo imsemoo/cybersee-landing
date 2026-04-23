@@ -65,10 +65,18 @@
                         <a href="contact.html" class="navbar__dropdown-item">Contact</a>
                     </div>
                 </li>
+                <li class="navbar__mobile-cta">
+                    <a href="https://calendly.com/m-alsalahi-cybersee/30min?month=2026-04" class="btn btn--primary" target="_blank" rel="noopener">
+                        <i class="fas fa-calendar"></i> Book a Demo
+                    </a>
+                    <a href="contact.html" class="btn btn--secondary">Request Free Exposure Scan</a>
+                </li>
             </ul>
             <div class="navbar__actions">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                    <i class="fas fa-moon" id="themeIcon"></i>
+                <button class="theme-toggle" id="themeToggle" role="switch" aria-label="Toggle theme">
+                    <span class="theme-toggle__thumb" aria-hidden="true"></span>
+                    <i class="fas fa-sun theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true"></i>
+                    <i class="fas fa-moon theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true"></i>
                 </button>
                 <a href="#contact" class="btn btn--secondary btn--sm">Request Free Exposure Scan</a>
                 <a href="https://calendly.com/m-alsalahi-cybersee/30min?month=2026-04" class="btn btn--primary btn--sm" target="_blank" rel="noopener">Book a Demo</a>
@@ -228,6 +236,46 @@
                 <span class="section-tag">SLA &amp; Expectations</span>
                 <h2 class="section-title">Realistic Timelines,<br><span class="gradient-text">Structured Process</span></h2>
                 <p class="section-desc">Takedown timelines vary depending on the platform, registrar, hosting provider, and evidence requirements. Cybersee helps structure and accelerate the process through documented workflows, evidence packages, and partner-supported escalation where applicable.</p>
+            </div>
+
+            <div class="viz-timeline" data-aos="fade-up" data-aos-delay="100">
+                <ol class="viz-timeline__list">
+                    <li class="viz-timeline__item viz-timeline__item--critical">
+                        <div class="viz-timeline__head">
+                            <div class="viz-timeline__title"><i class="fas fa-triangle-exclamation"></i> Phishing Domain Detected</div>
+                            <span class="viz-timeline__time">T + 00:00</span>
+                        </div>
+                        <p class="viz-timeline__desc">Lookalike domain flagged via typosquatting monitor. Evidence captured automatically.</p>
+                    </li>
+                    <li class="viz-timeline__item">
+                        <div class="viz-timeline__head">
+                            <div class="viz-timeline__title"><i class="fas fa-file-shield"></i> Evidence Package Compiled</div>
+                            <span class="viz-timeline__time">T + 12 min</span>
+                        </div>
+                        <p class="viz-timeline__desc">WHOIS, hosting provider, screenshots, and brand-ownership proof bundled into registrar-ready submission.</p>
+                    </li>
+                    <li class="viz-timeline__item viz-timeline__item--warning">
+                        <div class="viz-timeline__head">
+                            <div class="viz-timeline__title"><i class="fas fa-paper-plane"></i> Takedown Request Filed</div>
+                            <span class="viz-timeline__time">T + 45 min</span>
+                        </div>
+                        <p class="viz-timeline__desc">Submitted to registrar &amp; hosting provider abuse channels. Case tracked with unique ID.</p>
+                    </li>
+                    <li class="viz-timeline__item">
+                        <div class="viz-timeline__head">
+                            <div class="viz-timeline__title"><i class="fas fa-arrow-up-right-from-square"></i> Escalated to Partners</div>
+                            <span class="viz-timeline__time">T + 6 hr</span>
+                        </div>
+                        <p class="viz-timeline__desc">No response from registrar &mdash; escalated through industry takedown partners and browser blocklists.</p>
+                    </li>
+                    <li class="viz-timeline__item viz-timeline__item--success">
+                        <div class="viz-timeline__head">
+                            <div class="viz-timeline__title"><i class="fas fa-circle-check"></i> Domain Suspended</div>
+                            <span class="viz-timeline__time">T + 18 hr</span>
+                        </div>
+                        <p class="viz-timeline__desc">Domain taken offline. Case closed with full audit trail delivered to the requesting team.</p>
+                    </li>
+                </ol>
             </div>
         </div>
     </section>

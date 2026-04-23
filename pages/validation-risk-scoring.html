@@ -65,10 +65,18 @@
                         <a href="contact.html" class="navbar__dropdown-item">Contact</a>
                     </div>
                 </li>
+                <li class="navbar__mobile-cta">
+                    <a href="https://calendly.com/m-alsalahi-cybersee/30min?month=2026-04" class="btn btn--primary" target="_blank" rel="noopener">
+                        <i class="fas fa-calendar"></i> Book a Demo
+                    </a>
+                    <a href="contact.html" class="btn btn--secondary">Request Free Exposure Scan</a>
+                </li>
             </ul>
             <div class="navbar__actions">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                    <i class="fas fa-moon" id="themeIcon"></i>
+                <button class="theme-toggle" id="themeToggle" role="switch" aria-label="Toggle theme">
+                    <span class="theme-toggle__thumb" aria-hidden="true"></span>
+                    <i class="fas fa-sun theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true"></i>
+                    <i class="fas fa-moon theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true"></i>
                 </button>
                 <a href="#contact" class="btn btn--secondary btn--sm">Request Free Exposure Scan</a>
                 <a href="https://calendly.com/m-alsalahi-cybersee/30min?month=2026-04" class="btn btn--primary btn--sm" target="_blank" rel="noopener">Book a Demo</a>
@@ -104,7 +112,51 @@
             <div class="section-header" data-aos="fade-up">
                 <span class="section-tag">Why Validation Matters</span>
                 <h2 class="section-title">Cut Through<br><span class="gradient-text">the Alert Fatigue</span></h2>
-                <p class="section-desc">External monitoring tools can generate high volumes of alerts. Without validation and prioritization, security teams waste time chasing low-value findings. Cybersee helps teams focus on relevant, actionable threats.</p>
+                <p class="section-desc">External monitoring tools can generate high volumes of alerts. Without validation and prioritization, security teams waste time chasing low-value findings. Cybersee scores every finding so teams focus on relevant, actionable threats.</p>
+            </div>
+
+            <div class="viz-gauge" data-aos="fade-up" data-aos-delay="100">
+                <div class="viz-gauge__chart">
+                    <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0" stop-color="#22c55e"/>
+                                <stop offset="0.5" stop-color="#f59e0b"/>
+                                <stop offset="1" stop-color="#ef4444"/>
+                            </linearGradient>
+                        </defs>
+                        <path class="viz-gauge__track" d="M 20 100 A 80 80 0 0 1 180 100"/>
+                        <path class="viz-gauge__fill" d="M 20 100 A 80 80 0 0 1 180 100"/>
+                        <line class="viz-gauge__needle" x1="100" y1="100" x2="100" y2="32"/>
+                        <circle cx="100" cy="100" r="6" fill="var(--brand-fg)"/>
+                    </svg>
+                    <div class="viz-gauge__value">
+                        <div class="viz-gauge__num">76</div>
+                        <div class="viz-gauge__unit">Risk Score</div>
+                    </div>
+                </div>
+                <div class="viz-gauge__breakdown">
+                    <div class="viz-gauge__row">
+                        <span class="viz-gauge__row-label">Source Credibility</span>
+                        <div class="viz-gauge__row-bar"><div class="viz-gauge__row-fill" style="width: 92%; background: #ef4444;"></div></div>
+                        <span class="viz-gauge__row-val">92</span>
+                    </div>
+                    <div class="viz-gauge__row">
+                        <span class="viz-gauge__row-label">Threat Severity</span>
+                        <div class="viz-gauge__row-bar"><div class="viz-gauge__row-fill" style="width: 84%; background: #f59e0b;"></div></div>
+                        <span class="viz-gauge__row-val">84</span>
+                    </div>
+                    <div class="viz-gauge__row">
+                        <span class="viz-gauge__row-label">Asset Relevance</span>
+                        <div class="viz-gauge__row-bar"><div class="viz-gauge__row-fill" style="width: 78%; background: #f59e0b;"></div></div>
+                        <span class="viz-gauge__row-val">78</span>
+                    </div>
+                    <div class="viz-gauge__row">
+                        <span class="viz-gauge__row-label">Evidence Quality</span>
+                        <div class="viz-gauge__row-bar"><div class="viz-gauge__row-fill" style="width: 55%; background: #22c55e;"></div></div>
+                        <span class="viz-gauge__row-val">55</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

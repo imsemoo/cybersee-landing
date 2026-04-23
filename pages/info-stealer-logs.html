@@ -65,10 +65,18 @@
                         <a href="contact.html" class="navbar__dropdown-item">Contact</a>
                     </div>
                 </li>
+                <li class="navbar__mobile-cta">
+                    <a href="https://calendly.com/m-alsalahi-cybersee/30min?month=2026-04" class="btn btn--primary" target="_blank" rel="noopener">
+                        <i class="fas fa-calendar"></i> Book a Demo
+                    </a>
+                    <a href="contact.html" class="btn btn--secondary">Request Free Exposure Scan</a>
+                </li>
             </ul>
             <div class="navbar__actions">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                    <i class="fas fa-moon" id="themeIcon"></i>
+                <button class="theme-toggle" id="themeToggle" role="switch" aria-label="Toggle theme">
+                    <span class="theme-toggle__thumb" aria-hidden="true"></span>
+                    <i class="fas fa-sun theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true"></i>
+                    <i class="fas fa-moon theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true"></i>
                 </button>
                 <a href="contact.html" class="btn btn--secondary btn--sm">Request Free Exposure Scan</a>
                 <a href="https://calendly.com/m-alsalahi-cybersee/30min?month=2026-04" class="btn btn--primary btn--sm" target="_blank" rel="noopener">Book a Demo</a>
@@ -112,9 +120,61 @@
             <div class="section-header" data-aos="fade-up">
                 <span class="section-tag">The Threat</span>
                 <h2 class="section-title">Info-Stealers Are<br><span class="gradient-text">a Primary Attack Vector</span></h2>
-                <p class="section-desc">Modern ransomware and fraud operations routinely start with stealer log purchases. A single infected employee device can expose credentials for dozens of corporate systems — often with active session cookies that bypass MFA.</p>
+                <p class="section-desc">Modern ransomware and fraud operations routinely start with stealer log purchases. A single infected employee device can expose credentials for dozens of corporate systems &mdash; often with active session cookies that bypass MFA.</p>
             </div>
 
+            <div class="viz-chart" data-aos="fade-up" data-aos-delay="100">
+                <div class="viz-chart__header">
+                    <div class="viz-chart__title">
+                        <i class="fas fa-chart-column"></i>
+                        Stealer Log Exposures &mdash; Last 6 Months
+                    </div>
+                    <div class="viz-chart__trend">
+                        <i class="fas fa-arrow-trend-up"></i> +62% YoY
+                    </div>
+                </div>
+                <div class="viz-chart__canvas">
+                    <div class="viz-chart__yaxis">
+                        <span>5k</span>
+                        <span>3.75k</span>
+                        <span>2.5k</span>
+                        <span>1.25k</span>
+                        <span>0</span>
+                    </div>
+                    <div class="viz-chart__bars">
+                        <div class="viz-chart__bar" style="--h: 28%">
+                            <div class="viz-chart__bar-fill"></div>
+                            <span class="viz-chart__bar-value">1.4k</span>
+                            <span class="viz-chart__bar-label">Jan</span>
+                        </div>
+                        <div class="viz-chart__bar" style="--h: 42%">
+                            <div class="viz-chart__bar-fill"></div>
+                            <span class="viz-chart__bar-value">2.1k</span>
+                            <span class="viz-chart__bar-label">Feb</span>
+                        </div>
+                        <div class="viz-chart__bar" style="--h: 56%">
+                            <div class="viz-chart__bar-fill"></div>
+                            <span class="viz-chart__bar-value">2.8k</span>
+                            <span class="viz-chart__bar-label">Mar</span>
+                        </div>
+                        <div class="viz-chart__bar" style="--h: 50%">
+                            <div class="viz-chart__bar-fill"></div>
+                            <span class="viz-chart__bar-value">2.5k</span>
+                            <span class="viz-chart__bar-label">Apr</span>
+                        </div>
+                        <div class="viz-chart__bar" style="--h: 74%">
+                            <div class="viz-chart__bar-fill"></div>
+                            <span class="viz-chart__bar-value">3.7k</span>
+                            <span class="viz-chart__bar-label">May</span>
+                        </div>
+                        <div class="viz-chart__bar viz-chart__bar--active" style="--h: 96%">
+                            <div class="viz-chart__bar-fill"></div>
+                            <span class="viz-chart__bar-value">4.8k</span>
+                            <span class="viz-chart__bar-label">Jun</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
